@@ -1,0 +1,60 @@
+{% extends '../layout.njk' %}
+
+{% block content %}
+   <section class="container edit-chef">
+
+      <div class="header">
+	 <h1>Editando Chef</h1>
+	 <div class="buttons">
+	    <button form='form-delete' class='delete-button' type='submit'>Deletar</button>
+	    <button form='form-put' class='add-chef-button' type='submit'>Salvar Chef</button>
+	 </div>
+      </div>
+
+      <form id="form-delete" action="/admin/chefs?_method=DELETE" method='POST' onsubmit='checkRecipes(event)'>
+	 <input type="hidden" name='id' value='{{chefs.id}}'>
+	 <input id='total' type="hidden" value='{{chefs.total_recipes}}'>
+      </form>
+
+      <form id="form-put" action="/admin/chefs?_method=PUT" method='POST'>
+	 <div class="chefs-fields">
+		 <div class="item">
+               <div>Nome do chef</div>
+               <div><input 
+               type="text" 
+               name='name' placheholder='Digite o nome do chef' 
+               value="{{chefs.name}}"></div>
+            </div>
+
+			<div class="item">
+				<div class="image-name">
+					{% if not avatar[0] %}
+					<p>Não possui foto selecionada</p>
+					{%else%}
+					<p>{{avatar[0].src}}</p>
+					{% endif %}
+				</div>
+			</div>
+
+            <div class="item">
+               <div id="avatar-upload">
+                  <input 
+                  id='avatar-input' 
+                  type='file' 
+                  name='file_id' 
+                  single
+                  accept='image/*'
+                  >
+                  <span>Enviar Avatar</span>
+               </div>
+            </div>
+	   
+
+	    <input type="hidden" name='id' value={{chefs.id}}>
+	 </div>
+      </form>
+   </section>
+
+   {% include "../script.njk" %}
+{% endblock content %}
+

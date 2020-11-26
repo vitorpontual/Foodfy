@@ -1,0 +1,110 @@
+#user-page {
+   position: relative;
+
+   width: 940px;
+   padding: 30px 0;
+   display: grid;
+   grid-template-columns: 90.6px 1fr 1fr;
+   align-items: center;
+   padding-bottom: 32px;
+
+   align-self: center
+}
+
+#user-page nav {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+#user-page nav a {
+   position: relative;
+   color: #111;
+   font-size: 16px;
+   line-height: 19px;
+   text-decoration: none;
+}
+
+#user-page nav a + a {
+   margin-left: 15px;
+}
+
+#user-page nav a:hover{
+   color: var(--primary-color);
+   font-weight: 700;
+}
+
+#user-page nav a.active {
+   font-weight: bold;
+   color: #777;
+
+}
+
+#user-page nav a::after {
+   content: '';
+   width: 0;
+   height: 2px;
+   background-color: var(--primary-color);
+   
+   position: absolute;
+   left: 0;
+   bottom: -4px;
+}
+
+#user-page nav a:hover::after{
+   width: 100%;
+   transition: width 200ms ease-out;
+}
+
+#user-page form {
+   justify-self: right;
+   display: grid;
+   grid-template-columns: 1fr 120px;
+}
+
+#user-page form input {
+   border-bottom: 1px solid #eee;
+   padding: 4px 8px;
+   box-sizing: border-box;
+   margin-right: 12px;
+   width:220px;
+}
+
+#user-page form button[type='submit']{
+   padding: 8px;
+   background-color: var(--primary-color);
+   color: white;
+   border-radius: 4px;
+   width: 100%;
+   font-size: 16px;
+   font-weight: bold;
+}
+
+section.container {
+   width: 940px;
+   align-self: center;
+}
+
+section.recipes-page {
+   width: 940px;
+   align-self: center;
+}
+
+footer {
+   width: 100%;
+   height: 62px;
+   margin-top: auto;
+   background-color: #EEEEEE;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+  
+}
+
+footer p {
+   font-size: 14px;
+   line-height: 16px;
+   color: #999999;
+   text-align: center;
+}
+

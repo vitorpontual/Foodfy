@@ -1,0 +1,43 @@
+/* LIST USERS */
+section.users.container .card {
+   display: flex;
+   flex-direction: column;
+   font-family: 'Libre Franklin', sans-serif;
+}
+
+section.users.container .card h4 {
+   font-size: 18px;
+   color: #111;
+   margin-bottom: 4px;
+   }
+
+section.users.container .card p {
+   font-size: 14px;
+   color: #777;
+}
+
+section.users.container .card .container {
+   margin-top: 16px;
+}
+section.users.container .card .container a{
+   font-size: 14px;
+   color: var(--primary-color);
+   font-weight: bold;
+}
+
+section.users.container .card .container button {
+   padding: 0;
+   margin: 0;
+   margin-left: 16px;
+   border: none;
+   background: none;
+
+   width: 0;
+   font-size: 14px;
+   font-weight: bold;
+   color: #F55A5A;
+
+   cursor: pointer;
+}
+
+/* PROFILE */ 

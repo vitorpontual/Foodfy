@@ -1,0 +1,11 @@
+{% extends './layout.njk' %}
+{% import './parts/section-recipes.njk' as section%}
+
+{% block filter %}
+
+      {% include './parts/filter.njk'%}
+      {% endblock filter%}
+      {% block content %}
+	 {{section.recipes('Buscando por ', filter,'grid', recipes)}}
+   </section>
+{% endblock content %}

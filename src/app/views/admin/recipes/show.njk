@@ -1,0 +1,97 @@
+{% extends '../layout.njk'%}
+
+{% block style %}
+<link rel="stylesheet" href="/css/admin/gallery.css">
+{% endblock style %}
+{% block content %}
+   <section class='container details'>
+
+       <div class="header show">
+	   <h1>Detalhes</h1>
+	   <button type='submit' onclick="window.location.href='/admin/recipes/{{recipes.id}}/edit'">Editar receitas</button>
+       </div>
+       <div class='content'>
+	   <div class="gallery">
+	       <div class="highlight">
+		   {% if not files[0] %}
+		   <img src="http://placehold.it/500x500?text=PRODUTO SEM FOTO">
+		   {% else %}
+		   <img 
+		   src="{{files[0].src}}" 
+		   alt="{{files[0].title}}"
+		   onclick='Lightbox.open()'>
+		   {% endif %}
+		   <div class="lightbox-target">
+		       <img src="{{files[0].src}}" alt="{{files[0].title}}">
+		       <a 
+		       href="#"
+		       class='lightbox-close'
+		       onclick='Lightbox.close()'
+		       >
+			   <i class='material-icons'>close</i>
+		       </a>
+		   </div>
+	       </div>
+	       <div class="gallery-preview">
+		   {% for image in files %}
+		   <img 
+		   src="{{image.src}}" 
+		   alt="{{image.name}}"
+		   {% if loop.index0 == 0 %}
+		   class='active'
+		   {% endif %}
+		   onclick='ImageGallery.setImage(event)'
+		   >
+		   {% endfor %}
+	       </div>
+	   </div>
+	
+	   <div class="info">
+	       <h4>{{recipes.title}}</h4>
+	       <p class="author">por {{recipes.chef_name}}</p>
+	   </div>
+
+	   <div class="instructions">
+
+	       <div class="ingredients">
+		   <div class="title">
+		       <h4>Ingredientes</h4>
+		       <button class='botao'>ESCONDER</button>
+		   </div>
+		   <div class="hide">
+		       {% for ingredient in recipes.ingredients %}
+		       <ul>
+			   <li>{{ingredient}}</li>
+		       </ul>
+		       {% endfor %}
+		   </div>
+	       </div>
+
+	       <div class="preparation">
+		   <div class="title">
+		       <h4>Modo de preparo</h4>
+		       <button class='botao'>ESCONDER</button>
+		   </div>
+		   <div class="hide">
+		       {% for item in recipes.preparation %}
+		       <ul>
+			   <li>{{item}}</li>
+		       </ul>
+		       {% endfor %}
+		   </div>
+	       </div>
+
+	       <div class="information">
+		   <div class="title">
+		       <h4>Informações adicionais</h4>
+		       <button class='botao'>ESCONDER</button>
+		   </div>
+		   <p class="hide">{{recipes.information}}</p>
+	       </div>
+	   </div>
+
+       </div>
+
+   </section>
+   <script src='/script.js'></script>
+{% endblock content%}

@@ -1,0 +1,55 @@
+section.container.chefs .cards {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   align-items: center;
+}
+
+section.container.chefs .card {
+   display: grid;
+   grid-template-columns: 64px 1fr;
+   align-items: center;
+}
+
+section.container.chefs .card img {
+   width: 64px;
+   height: 64px;
+   border-radius: 50px;
+   margin: 0;
+   object-fit: cover;
+}
+
+/* SECTION CHEF */
+
+section.container.chef .profile {
+   margin: 0 auto;
+   padding-top: 32px;
+   display: grid;
+}
+
+
+section.container.chef .profile .avatar {
+   width: 200px;
+   height: 200px;
+   border-radius: 50%;
+   justify-self: center;
+   margin-bottom: 24px;
+}
+
+section.container.chef .profile h1 {
+   font-size: 36px;
+   text-align: center;
+   margin-bottom: 20px;
+   color: #111;
+}
+
+section.container.chef .profile h2 {
+   font-size: 20px;
+   color: #777;
+   text-align: center;
+   font-weight: normal;
+   margin-bottom: 40px;
+}
+
+section.container.chef .recipes > h1 {
+   margin-bottom: 24px;
+}

@@ -1,0 +1,37 @@
+{% extends '../layout.njk' %}
+
+{% block style %}
+<link rel="stylesheet" href="/css/gallery.css">
+{% endblock style %}
+{% block content %}
+
+   <section class="container edit-recipe">
+         <div class="header">
+            <h1>Criar Receitas</h1>
+            <div class="buttons">
+               <button form='form-delete' class="delete-button" type='submit'>Deletar</button>
+               <button form='form-put' type='submit'>Salvar Receita</button>
+            </div>
+         </div>
+
+	 <form id="form-delete" action="/admin/recipes?_method=DELETE" method='POST'>
+	    <input type="hidden" name='id' value='{{recipes.id}}'>
+       {% for image in files.src %}
+       <input type='hidden' name='files_id' value='{{image.id}}'>
+       {% endfor %}
+	 </form>
+
+	 <form id="form-put" action="/admin/recipes?_method=PUT" method='POST' enctype='multipart/form-data'>
+	    <div class="recipes-fields">
+	       {% include "./fields.njk" %}
+	    </div>
+
+	    <input type="hidden" name='id' value='{{recipes.id}}'>
+	 </form>
+      </div>
+   </section>
+
+   {% include "../script.njk" %}
+
+   <script src="/script.js"></script>
+{% endblock content %}

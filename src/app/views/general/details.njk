@@ -1,0 +1,55 @@
+{% extends './layout.njk' %}
+
+{% block content %}
+   <section class="container details">
+        <div class="banner">
+            <img src="{{files[0].img}}" alt="{{items.title}}">
+        </div>
+
+        <div class="info">
+            <h4>{{recipes.title}}</h4>
+            <p class="author">por {{recipes.chef_name}}</p>
+        </div>
+
+        <div class="instructions">
+
+            <div class="ingredients">
+                <div class="title">
+                    <h4>Ingredientes</h4>
+                    <button class='botao'>ESCONDER</button>
+                </div>
+                <div class="hide">
+                    {% for ingredient in recipes.ingredients %}
+                    <ul>
+                        <li>{{ingredient}}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="preparation">
+                <div class="title">
+                    <h4>Modo de preparo</h4>
+                    <button class='botao'>ESCONDER</button>
+                </div>
+                <div class="hide">
+                    {% for item in recipes.preparation %}
+                    <ul>
+                        <li>{{item}}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="information">
+                <div class="title">
+                    <h4>Informações adicionais</h4>
+                    <button class='botao'>ESCONDER</button>
+                </div>
+                <p class="hide">{{recipes.information}}</p>
+            </div>
+        </div>
+
+   </section>
+   <script src='/script.js'></script>
+{% endblock content%}

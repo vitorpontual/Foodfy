@@ -1,0 +1,22 @@
+{% extends '../layout.njk' %}
+{% block style %}
+<link rel="stylesheet" href="/css/gallery.css">
+{% endblock style %}
+{% block content %}
+
+
+   <section class="container create-recipe">
+         <div class="header">
+	    <h1>Criar Receitas</h1>
+	    <button form='submit' type="submit">Salvar Receita</button>
+	 </div>
+	    <form id='submit' action="/admin/recipes" method='POST' enctype='multipart/form-data'>
+
+	       {% include './fields.njk' %}
+	    </form>
+	 </div>
+   </section>
+
+   <script src="/script/script.js"></script>
+
+{% endblock content %}

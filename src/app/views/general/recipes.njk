@@ -1,0 +1,14 @@
+{% extends './layout.njk' %}
+{% import './parts/section-recipes.njk' as section%}
+
+
+{% block content %}
+   <section class='recipes-page'>
+      {{section.recipes('Receitas', '', 'grid', recipes)}}
+      <div class="pagination" data-page='{{paginate.page}}' data-total='{{paginate.total}}' data-filter="{{filter}}"></div>
+   </section>
+
+  <script src="/script/paginate-script.js"></script>
+  <script src="/script/script.js"></script>
+   
+{% endblock content %}

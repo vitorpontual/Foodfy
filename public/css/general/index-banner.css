@@ -1,0 +1,36 @@
+section.index.container {
+   width: 940px;
+   margin: 0 auto;
+}
+
+section.index.container .banner {
+   width: 100%;
+   height: 366px;
+   background-color: #FBDFBD;
+   border-radius: 30px;
+   
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+
+}
+
+section.index.container .banner img {
+   position: absolute;
+   right: 100px;
+   bottom: 0;
+}
+
+section.index.container .banner-text {
+   max-width: 350px;
+   margin-left: 60px;
+}
+
+section.index.container .banner-text h2{
+   font-size: 32px;
+   line-height: 38px;
+   font-weight: bold;
+   color: #111111;
+   margin-bottom: 10px;
+}

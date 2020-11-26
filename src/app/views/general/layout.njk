@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      {% block title %}
+         <title>Foodfy</title>
+      {% endblock title %}
+
+      {% include './parts/style.njk'%}
+   </head>
+   <body>
+      <div id='user-page'>
+         {% include './parts/header.njk' %}
+         {% block filter %}{% endblock filter %}
+      </div>
+
+      {% block content %}{% endblock content %}
+
+      <footer>
+         {% include './parts/footer.njk' %}
+      </footer>
+
+      <script src='/script/script.js'></script>
+   </body>
+</html>

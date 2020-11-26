@@ -1,0 +1,268 @@
+/* PHOTOS UPLOADS */
+
+form .item .photo-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 149px;
+
+    margin-bottom: 16px
+    
+}
+
+form .item #photos-uploads {
+    position:relative;
+
+
+    overflow: hidden;
+
+    width: 149px;
+    height: 149px;
+    margin: 8px 0;
+    margin-right: 8px;
+
+}
+
+form .item #photos-uploads i {
+    background-color:white;
+    color: grey;
+    border: 3px solid #dddddd;
+    width: 143px;
+    height: 143px;
+
+    font-size: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+form .item #photos-uploads input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    opacity: 0;
+    cursor: pointer;
+    
+} 
+
+form .item #photos-preview {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 8px;
+    width: 149px;
+}
+
+form .item #photos-preview img {
+    width: 149px;
+    height: 149px;
+    border-radius: 12px;
+
+    object-fit: cover;
+    transition: 200ms;
+
+}
+
+form .item #photos-preview img:hover{
+    transform: scale(1.05);
+}
+
+form .item #photos-preview .photo {
+    position: relative;
+    margin: 0;
+    height: 149px;
+}
+
+form #photos-preview .photo i {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: rgba( 255,255,255,0.7);
+    color: red;
+
+    width: 149px;
+    height: 149px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 400%;
+    cursor: pointer;
+
+    transition: opacity 200ms;
+
+    opacity: 0;
+}
+
+form #photos-preview .photo:hover i {
+    opacity: 1;
+}
+
+/* GALLERY */ 
+
+.content .gallery {
+    width: 100%;
+}
+
+.content .gallery .highlight > img {
+    width: 100%;
+    height: 280px;
+    border-radius: 12px;
+
+    object-fit: cover;
+    object-position: 50% 50%;
+    
+    cursor: zoom-in;
+}
+
+.content .gallery-preview {
+    display:flex;
+    justify-content: flex-end;
+}
+
+.content .gallery-preview img + img {
+    margin-left: 4px;
+}
+
+.content .gallery-preview img{
+    height: 50px;
+    width: 50px;
+    border-radius: 12px;
+
+    object-fit: cover;
+    opacity: 0.6;
+    cursor: pointer;
+
+    transition: 200ms;
+}
+
+.content .gallery-preview img:hover,
+.content .gallery-preview img.active{
+    opacity: 1;
+}
+
+/* LIGHTBOX GALLERY */
+
+.content .highlight .lightbox-target {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    
+    overflow: hidden;
+    z-index: 100;
+    top: -100%;
+    left: 0;
+    opacity: 0;
+    transition: opacity 400ms;
+}
+
+.content .highlight .lightbox-target img {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+
+    width: 90%;
+    height: 90%;
+
+    object-fit: contain;
+}
+
+.content .highlight a.lightbox-close {
+    width: 50px;
+    height: 50px;
+    text-decoration: none;
+    color: white;
+
+    position: absolute;
+    top: 33px;
+    right: 2%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 400ms;
+}
+
+/* Detais Page */
+
+.content .info {
+   text-align: center;
+}
+
+.content .info h4 {
+   font-size: 36px;
+}
+
+.content .info p {
+   color: #777;
+   font-size: 20px;
+}
+
+.content .instructions h4{
+   font-size: 24px;
+   margin: 30px 0;
+}
+
+.content .instructions{
+   padding-top: 32px;
+}
+
+.content .instructions button {
+   font-size: 12px;
+   background: none;
+   color: #999;
+   margin-left: 13px;
+   margin-top: 5px;
+   cursor: pointer;
+}
+
+.content .title {
+   display: flex;
+   align-items: center
+}
+
+.content .instructions ul {
+   margin-left: 19px;
+}
+
+.content ul li {
+   font-size: 18px;
+   color: #444;
+   line-height: 27px;
+}
+
+.content .instructions .information p {
+   margin-bottom: 70px;
+   color: #444;
+   font-size: 18px;
+   text-align: justfy;
+   white-space: pre-line;
+   line-height: 27px;
+}
+
+/* Active Toggle */
+
+.hide {
+   display: block
+}
+
+.hide.active {
+   display: none;
+}
+

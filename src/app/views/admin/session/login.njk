@@ -1,0 +1,30 @@
+{% extends '../layout.njk'%}
+
+{% block header %}
+   <header class='login'>
+      <div class="content">
+	 <img src="/logo.png" alt="">
+      </div>
+   </header>
+{% endblock header %}
+
+{% block content %}
+
+   <section class="login container">
+      <form action="/admin/login" method='POST'>
+	 <div class="header">
+	    <h4>Iniciar Sessão</h4>
+	 </div>
+	 <div class="fields">
+	    {% include './fields.njk'%}
+	 </div>
+
+	 <div class="footer">
+	    <a href="/users/forgot-password">Perdeu a senha?</a>
+	    <button class='button' type='submit'>Acessar</button>
+	 </div>
+      </form>
+
+
+   </section>
+{% endblock %}

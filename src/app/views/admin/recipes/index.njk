@@ -1,0 +1,22 @@
+{% extends '../layout.njk' %}
+{% import '../parts/section-recipes.njk' as section%}
+{% block filter %}
+  {% include '../parts/filter.njk'%}
+{% endblock filter %}
+
+{% block content %}
+
+   <section class="index-admin container">
+
+      <div class="header">
+        <h1>Gerenciar Receitas</h1>
+
+	<a class=button href='/admin/recipes/create'>Criar Receita</a>
+
+      </div>
+      {{section.recipes('', '', 'index', recipes)}}
+
+   </section>
+
+    <div class="pagination" data-page='{{paginate.page}}' data-total='{{paginate.total}}' data-filter="{{filter}}"></div>
+{% endblock content %}

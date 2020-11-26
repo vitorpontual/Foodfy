@@ -1,0 +1,39 @@
+{% extends '../layout.njk' %}
+
+{% block content %}
+
+   <section class="container chef">
+      <div class=header>
+	 <h1>Chef: {{chefs.name}}</h1>
+	 <button class="add-chef-button" onclick='window.location.href="/admin/chefs/{{chefs.id}}/edit"' type='submit'>Editar Chef</button>
+      </div>
+
+      <div class="profile">
+	 <div class='avatar' 
+	      style='background: url({{chefs.avatar_url}}) no-repeat center center/ cover;
+	      background-size: 304px;' 
+	      alt="{{chefs.name}}">
+	 </div>
+	 <h1>{{chefs.name}}</h1>
+	 <h2>{{chefs.total_recipes}} Receitas</h2>
+      </div>
+
+      <div class="recipes">
+	 <h1>Receitas</h1>
+	 <div class="cards">
+	 {% for recipe in recipesChefs %}
+	    <div class="card">
+	       <div>
+		  <img src="{{recipe.image}}" alt="{{recipe.title}}">
+	       </div>
+	       <div>
+		  <h1>{{recipe.title}}</h1>
+		  <h2>por {{chefs.name}}</h2>
+		  <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
+	       </div>
+	    </div>
+	 {% endfor %}
+	 </div>
+   </section>
+
+{% endblock content %}

@@ -1,0 +1,366 @@
+/* ADMIN */
+
+section.container {
+   width: 90%;
+   max-width: 940px;
+   height: 500px;
+   margin: 0 auto;
+}
+
+header {
+   background-color: black;
+   color: white;
+   
+   width: 100%;
+   padding: 32px 0;
+
+   text-align: center; 
+
+}
+
+header div.container {
+   max-width: 940px;
+   display: grid;
+   grid-template-columns:90.6px 1fr 1fr;
+   margin: 0 auto;
+}
+
+header div.container .navbar {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+header div.container .navbar a {
+   position: relative;
+   color: white;
+   font-size: 16px;
+   line-height: 19px;
+   text-decoration: none;
+}
+
+header div.container .navbar a + a {
+   margin-left: 15px;
+}
+
+header div.container .navbar a:hover{
+      color: white;
+   font-weight: 700;
+}
+
+header div.container .navbar a.active {
+   font-weight: bold;
+   color: #777;
+
+}
+
+form.logout button::after,
+header div.container .navbar a::after {
+   content: '';
+   width: 0;
+   height: 2px;
+   background-color: var(--primary-color);
+   
+   position: absolute;
+   left: 0;
+   bottom: -4px;
+}
+
+form.logout button:hover::after,
+header div.container .navbar a:hover::after{
+   width: 100%;
+   transition: width 200ms ease-out;
+}
+
+
+/* HEADER ADMIN PAGE*/
+section.container .header {
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+   margin: 32px 0;
+}
+
+/* CARDS */
+
+section.container .cards.index {
+   grid-template-columns: 1fr 1fr;
+}
+section.container .cards {
+   display: grid;
+   grid-template-columns:1fr 375px 140px;
+   grid-gap: 20px;
+}
+
+section.container .cards .card {
+   display: grid;
+   grid-template-columns: 172px 1fr;
+}
+
+section.container .card div:nth-child(2){ 
+   margin: 0;
+   margin-left: 12px;
+}
+
+section.container .card img {
+   width: 172px;
+   height: 80px;
+   border-radius: 8px;
+}
+
+section.container .card h1 {
+   font-size: 18px;
+   font-weight: normal;
+   line-height: 21px;
+   color: #111;
+   margin-bottom: 5px;
+}
+
+section.container .card h2 {
+   font-size: 14px;
+   color: #777;
+   margin-bottom: 10px;
+   font-weight: normal;
+}
+
+section.container .card a {
+   font-size: 14px; 
+   line-height: 16px;
+   text-decoration: none;
+   color: var(--primary-color);
+   font-weight: bold;
+}
+
+/* BUTTON */
+
+section.container.profile .buttons a {
+   background-color: grey;
+}
+section.container .buttons a,
+section.container .button,
+section.container button {
+   padding: 10px 8px;
+   background-color: var(--primary-color);
+   color: #fff;
+
+   width: 120px;
+
+   font-size: 16px;
+   font-weight: bold;
+   line-height: 20px;
+   border-radius: 4px;
+   outline: none;
+   margin-left: 10px;
+
+   text-align: center;
+}
+
+section.container.profile .delete-button {
+   background-color: red;
+}
+
+
+section.container .add-button {
+   font-size: 16px;
+   font-weight: bold;
+   color: var(--primary-color);
+   cursor: pointer;
+   margin-left: 14px;
+}
+
+section.container.edit-recipe .header .buttons .delete-button {
+   background-color: red;
+}
+
+
+/* FORM */
+
+section.container form .item div:first-child {
+   font-size: 16px;
+   font-weight: bold;
+   line-height: 19px;
+   color: #111;
+   margin: 16px 0;
+}
+
+section.container form .item input,
+section.container form .item select,
+section.container form .item textarea {
+   width: 100%;
+   height: 49px;
+   border: 1px solid #ddd;
+   border-radius: 4px;
+
+   padding: 4px 10px;
+   box-sizing: border-box;
+   
+   outline: none;
+   color: #666;
+   margin-bottom: 16px;
+
+   position: relative;
+   z-index: 2;
+}
+
+section.container form .item textarea {
+   height: 200px;
+   resize: none;
+}
+
+section.profile form .header h4 {
+   font-size: 24px;
+   color: #111;
+}
+
+section.profile form .fields {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-gap: 0 40px;
+}
+
+section.profile form .fields .check {
+   display: flex;
+   align-items: center;
+}
+
+section.profile form .fields .check input {
+   width: 15px;
+   height: 15px;
+   margin: 0;
+   margin-right: 8px;
+
+}
+
+
+/* VALIDATE ERROS*/
+section.profile form .fields .error{
+   top: 279px;
+   animation: emailprofile 300ms 3s ease-out forwards;
+}
+
+@keyframes emailprofile{
+   to {
+      top: 220px;
+      opacity: 0;
+   }
+}
+
+
+.input .error {
+   position: fixed;
+   top: 379px;
+   z-index: 1;
+   background: #e74c3c;
+   padding: 4px;
+   color: white;
+   border-radius: 4px;
+   width: 270px;
+   text-align: center;
+   
+   animation: emailmessage 300ms 3s ease-out forwards;
+}
+
+@keyframes emailmessage {
+   to {
+      top: 350px;
+      opacity: 0;
+   }
+}
+/* LOGOUT BUTTON */
+
+form.logout {
+   position: absolute;
+   top: 37px;
+   right: 50px;
+}
+ 
+form.logout button {
+   background: none;
+   color: white;
+   font-size: 15px;
+}
+
+form.logout button:hover {
+   font-weight: bold;
+}
+
+/* AVATAR UPLOAD */
+
+form .item #avatar-upload {
+   display: flex;
+   align-items: center;
+   width: 139px;
+   height: 149px;
+
+}
+
+form .item #avatar-upload {
+   position: relative;
+
+   overflow: hidden;
+
+   width: 139px;
+   height: 37px;
+   
+}
+
+form .item #avatar-upload span {
+   background: var(--primary-color);
+   color: white;
+   width: 139px;
+   height: 37px;
+
+   font-size: 16px;
+   font-weight: bold;
+
+   border-radius: 4px;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+form .item #avatar-upload input {
+   position: absolute;
+   top: 0;
+   right: 0;
+   bottom: 0;
+   left: 0;
+
+   overflow: hiden;
+   opacity: 0;
+   cursor: pointer;
+}
+
+/* ERROR MESSAGES */
+.messages {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   width: 344px;
+   height: 135px;
+   position: absolute;
+   top: 12px;
+   right: 18px;
+   color: white;
+   opacity: 100%;
+
+   animation: hidemessage 300ms 5s ease-out forwards;
+}
+
+.messages.error {
+   background-color: #DC4747;
+}
+
+.messages.sucess {
+   background-color: #01B12A;
+}
+
+@keyframes hidemessage {
+   to {
+      top: -50px;
+      opacity: 0;
+   }
+}
+

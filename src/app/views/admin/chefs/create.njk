@@ -1,0 +1,19 @@
+{% extends '../layout.njk' %}
+
+{% block content %}
+   <section class="container create-chef">
+      <div class="chefs">
+      <div class=header>
+	 <h1>Criar Chef</h1>
+	 <button form='submit' class='button' type='submit'>Salvar Chef</button>
+      </div>
+         <form id='submit' action="/admin/chefs" method='POST' enctype=multipart/form-data>
+	    <div class="fields">
+	       {% include '../parts/fields-chef.njk'%}
+	    </div>
+
+         </form>
+      </div>
+   </section>
+
+{% endblock content %}

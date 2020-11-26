@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name='viewpoert' content='width=device-width, initital-scale=1.0'>
+
+      {% block title%}
+         <title>Admin - Foodfy</title>
+      {% endblock title%}
+
+      {% block style %}{% endblock style%}
+
+      {% include './parts/style.njk'%}
+
+   </head>
+   <body>
+      {% include './parts/messages.njk'%}
+
+      {% block header%}
+	 {% include './parts/header.njk'%}
+      {% endblock header%}
+
+      {% block content %}{% endblock content%}
+
+
+      {% include './parts/script.njk'%}
+   </body>
+</html>

@@ -1,0 +1,41 @@
+section.chef.container {
+   width: 940px;
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   align-self: center;
+}
+
+section.chef.container .card {
+   display: grid;
+   grid-template-columns: 64px 1fr;
+}
+
+section.chef.container .card + .card {
+   margin-left: 16px;
+}
+
+section.chef.container .card div {
+   margin-left: 16px;
+   align-self: center;
+}
+
+section.chef.container .card img {
+   border-radius: 54px;
+   width: 64px;
+   height: 64px;
+   object-fit: cover;
+}
+
+section.chef.container .card h2 {
+   font-size: 18px;
+   line-height: 21px;
+   color: #111;
+   margin-bottom;
+   text-align: left;
+}
+
+section.chef.container .card p {
+   font-size: 14px;
+   color: #666;
+   text-align: left;
+}

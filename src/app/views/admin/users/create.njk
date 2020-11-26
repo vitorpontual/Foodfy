@@ -1,0 +1,19 @@
+{% extends '../layout.njk' %}
+
+{% block content %}
+   <section class="profile container">
+      <form action="/admin/users" method='POST'>
+	 <div class="header">
+	    <h4>Criar Usuário</h4>
+	    <div class="buttons">
+	       <button type='submit' class='button'>Salvar</button>
+	       <a href="/admin/users">Cancelar</a>
+	    </div>
+	 </div>
+
+	 <div class="fields">
+	    {% include './fields-edit.njk'%}
+	 </div>
+      </form>
+   </section>
+{% endblock content%}

@@ -1,0 +1,30 @@
+header.login {
+      background: none;
+}
+
+section.login.container {
+   width: 450px;
+}
+
+section.login.container form .header{ 
+   display: flex;
+   justify-content: center;
+   margin-top: 146px;
+}
+
+section.login.container form .header h4 {
+   font-size: 24px;
+   font-weight: bold;
+}
+
+section.login.container form .footer {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: 35px;
+}
+
+section.login.container form .footer a {
+   color: #969696;
+   font-size: 16px;
+}

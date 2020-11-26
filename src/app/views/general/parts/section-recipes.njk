@@ -1,0 +1,16 @@
+{% macro recipes(name,filter, classes, recipes)%}
+<section class="container {{classes}}">
+   {%if name %}
+      <h1>{{name}}{% if filter%}"{{filter}}"{%endif%}</h1>
+   {%endif%}
+   <div class="cards">
+      {% for recipe in recipes %}
+	 <div class="card" id='{{recipe.id}}'>
+	    <img src="{{recipe.img}}" alt="{{recipe.title}}">
+	    <h4>{{recipe.title}}</h4>
+	    <p>por {{recipe.chefs_name}}</p>
+	 </div>
+      {%endfor%}
+   </div>
+</section>
+{%endmacro%}
