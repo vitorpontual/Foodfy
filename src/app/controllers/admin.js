@@ -37,9 +37,6 @@ exports.index = async (request, response) => {
 
    const recipes = await Promise.all(recipePromise)
 
-
-
-
    if( recipes == ''){
       const paginate = {
          page
@@ -109,7 +106,6 @@ exports.post = async (request, response) => {
    } catch(err){
       console.log(`Error => ${err}`)
    }
-
    
 }
 
@@ -122,6 +118,7 @@ exports.edit = async function(request, response){
 
    results = await Recipe.files(recipes.id)
    let files = results.rows
+
    
 
    files = files.map(file => ({
@@ -133,6 +130,9 @@ exports.edit = async function(request, response){
 }
 
 exports.put = async function(request, response) {
+
+   console.log(request.body)
+   console.log(request.files)
    const keys = Object.keys(request.body)
 
    for(key of keys){

@@ -2,68 +2,63 @@ const User = require('../models/User')
 
 module.exports = {
    async list(request, response){
-      const { userId: id } = request.session
+      let { userId: id } = request.session
+
+      let user_id = await User.findOne({where: {id}})
+      request.session.isAdmin = user_id.is_admin
+      console.log(request.session)
 
       let results = await User.all()
       const users = results.rows
 
 
-
-
-
-      admin = await User.findOne({where: {id}})
-
-      request.session.isAdmin = admin.is_admin
-
-      console.log(request.session)
-
       return response.render('admin/users/list', {users})
    },
    create(request, response){
-      console.log(request.body)
       return response.render('admin/users/create')
    },
    async post(request, response){
 
-      const user = {
-	 name: request.body.name,
-	 email: request.body.email,
-	 is_admin: request.body.is_admin || 0
-      }
-
-      let results = await User.create(user)
-      const userId = results.rows[0].id
-
- 
+      let userId = await User.create(request.body)
 
 
-      return response.redirect(`/admin/users/${userId}`)
+      return response.redirect(`/admin/users`)
       
    },
    async show(request, response){
       const { id } = request.params
 
-
       const user = await User.findOne({where: {id}})
-
-      
 
       return response.render('admin/users/edit', { user })
    },
    async put(request, response){
-      return
+      try{
+	 let { name, email, is_admin, id} = request.body
+
+	 await User.update(id, {
+	    name,
+	    email,
+	    is_admin: request.body.is_admin || 0
+	 })
+
+	 return response.render('admin/users/edit', {
+	    user: request.body,
+	    sucess: 'Account Updated'
+	 })
+      }catch(err){
+	 console.log(err)
+      }
    },
    async delete(request, response){
       try{
-
 	 const userId = request.body.id
-	 await User.delete(userId)
-
+	 User.delete(userId)
 
 	 return response.redirect('/admin/users')
-
       }catch(err){
 	 console.error(err)
+	 
       }
    }
 }

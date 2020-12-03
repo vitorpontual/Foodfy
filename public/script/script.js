@@ -1,6 +1,6 @@
-const buttons = document.querySelectorAll('.botao')
+const buttons = document.querySelectorAll('.details .botao')
 const hidden = document.querySelectorAll('.hide')
-const cards = document.querySelectorAll('.card')
+const cards = document.querySelectorAll('.recipes-page .card,#user-page .index .card')
 
 for ( let card of cards) {
     card.addEventListener("click", function(){
@@ -8,7 +8,6 @@ for ( let card of cards) {
        window.location.href = `http://localhost:5000/recipes/${recipe}`
     })
 }
-
 for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener('click', () => {
 
@@ -23,7 +22,7 @@ for (let i = 0; i < buttons.length; i++) {
 }
 
 const currentPage = location.pathname
-const menuItems = document.querySelectorAll('#user-page nav a')
+const menuItems = document.querySelectorAll('nav a, .navbar a')
 
 for (let item of menuItems){
    if (currentPage.includes(item.getAttribute('href'))){
@@ -37,20 +36,17 @@ function checkRemove(event){
       event.preventDefault()
    }
 }
-// add Ingredient
 
 function addIngredient(){
    const ingredients = document.querySelector(".ingredients")
    const fieldContainer = document.querySelectorAll('.ingredient')
 
-   const newField = fieldContainer[fieldContainer.length -1].cloneNode(true)
-
-   if(newField.children[0].value == '') return false
+   const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
+   if(newField.children[0].value == '') return true 
 
    newField.children[0].value = ''
    ingredients.appendChild(newField)
 }
-
 
 document
    .querySelector('.add-ingredient')
@@ -62,16 +58,16 @@ function addPreparation(){
    const preparations = document.querySelector('.preparations')
    const fieldContainer = document.querySelectorAll('.preparation')
 
-   const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
+   const newField = fieldContainer[fieldContainer.length - 1].cloneNode(false)
 
-   if (newField.children[0].value== '') return false
+   if (newField.children[0].value == '') return false 
 
    newField.children[0].value = ''
    preparations.appendChild(newField)
 }
 
 document
-   .querySelector('.add-prepare')
+   .querySelector('.add-preparation')
    .addEventListener('click', addPreparation)
 /* for (let card of cards) {
     card.addEventListener("click", function(){

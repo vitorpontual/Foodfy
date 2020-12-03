@@ -110,3 +110,6 @@ assets/
 *.jpeg
 *.png
 *.jpg
+
+# swp
+*.swp

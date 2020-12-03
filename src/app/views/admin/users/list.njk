@@ -5,21 +5,21 @@
    <section class="users container">
       <div class="header">
 	 <h1>Usuário</h1>
-	 {% if session.isAdmin == true %}
+	 {% if session.isAdmin %}
 	 <a class='button' href="/admin/create">Novo</a>
 	 {% endif %}
       </div>
       <div class="cards">
 	 {% for user in users%}
 	    <div class="card">
-	       <form onsubmit='checkRemove(event)' id='{{user.email}}'action="/admin/users?_method=DELETE" method='POST'>
-		  <input type="hidden" name='id' value={{user.id}}>
-	       </form>
 	       <h4>{{user.name}}</h4>
 	       <p>{{user.email}}</p>
 	       <div class="container">
 		  <a href="/admin/users/{{user.id}}">Editar</a>
-		  <button form='{{user.email}}' type='submit'>Remove</button>
+		  <form onsubmit='checkRemove(event)' action="/admin/users?_method=DELETE" method='POST'>
+		     <input type="hidden" name='id' value={{user.id}}>
+		     <button type='submit'>Remove</button>
+		  </form>
 	       </div>
 	    </div>
 	 {% endfor %}

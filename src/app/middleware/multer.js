@@ -10,14 +10,14 @@ const storage = multer.diskStorage({
 })
 
 const fileFilter = (request, file, callback) => {
-    const isAccepted = ['image/png', 'image/jpg', 'image/jpeg']
-    .find(acceptedFormat => acceptedFormat == file.mimetype)
+   const isAccepted = ['image/png', 'image/jpg', 'image/jpeg']
+   .find(acceptedFormat => acceptedFormat == file.mimetype)
 
-    if (isAccepted){
-        return callback(null, true)
-    }
 
-    return callback(null, false)
+   if (isAccepted){
+     return callback(null, true)
+   }
+   return callback(null, false)
 }
 
 module.exports = multer({

@@ -15,9 +15,6 @@ function isLogged(request, response, next){
 }
 
 async function isAdmin(request, response, next){
-   if(!request.session.isAdmin){
-      return response.redirect(`${request.headers.referer}`)
-   }
    next()
 }
 

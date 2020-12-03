@@ -1,7 +1,7 @@
 <div class="item">
    <div>Nome</div>
    <div>
-      <input type="{{chef.name}}" type='text' name='name' required>
+      <input value="{{chefs.name}}" type='text' name='name' required>
    </div>
 </div>
 
@@ -20,7 +20,7 @@
       <div id="photos-preview">
 	 {% if files %}
 	 {% for image in files %}
-	   <div id="{{image.id}}" class='photo'>
+	   <div id="{{image.file_id}}" class='photo'>
 	     <img src="{{image.src}}" alt="{{image.name}}">
 	     <i class="material-icons"
 	     onclick='PhotosUploads.removeOldPhoto(event)'

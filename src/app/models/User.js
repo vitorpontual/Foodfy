@@ -1,11 +1,13 @@
 const db = require('../../config/db')
+const { hash } = require('bcryptjs')
+const mailer = require('../../lib/mailer')
 const { randomPassword } = require('../../lib/utils')
 
 module.exports = {
    all(){
       return db.query(`SELECT * FROM users`)
    },
-   create(data){
+   async create(data){
       query = `
       INSERT INTO users(
       name,
@@ -17,14 +19,30 @@ module.exports = {
       `
       const firstPassword = randomPassword(8)
 
-      value = [
+      await mailer.sendMail({
+	 to: data.email,
+	 form: 'no-replay@foodfy.com.br',
+	 subject: 'Sua senha de Acesso',
+	 html:`
+	 <h2>Olá, ${data.name}</h2>
+	 <p>Sua senha para acessar a adminstração do Foodfy é:</p>
+	 <p>${firstPassword}</p>
+	 `
+      })
+
+      const passwordHash = await hash(firstPassword, 8)
+      console.log(passwordHash)
+
+      values = [
 	 data.name,
 	 data.email,
-	 firstPassword,
-	 data.is_admin
+	 passwordHash,
+	 data.is_admin || 0
       ]
 
-      return db.query(query, value)
+      const results = await db.query(query, values)
+      return results.rows[0].id
+
    },
    async findOne(filters){
       let query = `SELECT * FROM users`
@@ -57,7 +75,7 @@ module.exports = {
 	    query = `
 	    ${query}
 	    ${key}='${fields[key]}'
-	    WHERE id = ${id}
+	    WHERE id = '${id}'
 	    `
 	 }
       })
@@ -65,7 +83,6 @@ module.exports = {
       return 
    },
    delete(id){
-      console.log(id)
       return db.query(`DELETE FROM users WHERE id = $1`, [id])
    }
 }

@@ -15,11 +15,11 @@ routes.get('/login', isLogged, SessionController.loginForm)
 routes.post('/login', SessionValidator.login, SessionController.login)
 routes.post('/logout', SessionController.logout)
 // reset password / forgot
-//routes.get('/forgot-passowrd', SessionController.forgotForm)
-//routes.post('/forgot-password', SessionController.forgot)
+routes.get('/forgot-password', SessionController.forgotForm)
+routes.post('/forgot-password', SessionValidator.forgot, SessionController.forgot)
 
-//routes.get('/reset-password', SessionController.resetForm)
-//routes.post('/reset-password', SessionController.reset)
+routes.get('/reset-password', SessionController.resetForm)
+routes.post('/reset-password', SessionValidator.reset, SessionController.reset)
 
 // Profile
 routes.get('/profile', onlyUsers, UserValidator.show, ProfileController.index)
@@ -30,8 +30,8 @@ routes.get('/users', onlyUsers, UserController.list)
 routes.get('/create', onlyUsers, isAdmin, UserController.create)
 routes.get('/users/:id', onlyUsers, isAdmin, UserController.show )
 
-routes.post('/users', UserValidator.post, isAdmin, UserController.post)
-//routes.put('/users',onlyUsers, UserController.put)
+routes.post('/users', onlyUsers, isAdmin, UserValidator.post, UserController.post)
+routes.put('/users',onlyUsers, UserValidator.put,  UserController.put)
 routes.delete('/users', onlyUsers, isAdmin, UserController.delete)
 
 module.exports = routes

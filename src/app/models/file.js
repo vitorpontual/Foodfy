@@ -2,21 +2,22 @@ const db = require('../../config/db')
 const fs = require('fs')
 
 module.exports = {
-    create({filename, path}) {
+    async create({filename, path, chef_id}) {
 
-        const query = `
+        let query = `
         INSERT INTO files (
             name,
             path
         ) VALUES ($1,$2)
         RETURNING id
         `
-        const values = [
+        let values = [
             filename,
             path,
         ]
 
-        return db.query(query, values)
+       return db.query(query, values)
+
     },
     async createRecipeFiles({filename, path, recipe_id}){
         let query = `
@@ -44,11 +45,26 @@ module.exports = {
             recipe_id,
             fileId
         ]
-        console.log(values)
 
         return db.query(query, values)
 
     },
+   async deleteChefImage(id){
+      try{
+	 const results = await db.query(`
+	 SELECT * FROM files WHERE id = $1
+	 `, [id])
+	 const file = results.rows[0]
+
+	 fs.unlinkSync(file.path)
+
+	 // LOCAL DELETE
+	 await db.query(`DELETE FROM files WHERE id = $1`, [id])
+	 return
+      }catch(err){
+	 console.error(err)
+      }
+   },
     async delete(id) {
         try {
             const result = await db.query(`
@@ -57,11 +73,12 @@ module.exports = {
 
 
             fs.unlinkSync(file.path)
+
             // LOCAL DELETE
 
             await db.query(`DELETE FROM recipe_files WHERE recipe_files.file_id = $1`, [id])
 
-            return db.query(`DELETE FROM files WHERE id = $1`, [id])
+            await db.query(`DELETE FROM files WHERE id = $1`, [id])
         } catch (err) {
             console.log(err)
         }

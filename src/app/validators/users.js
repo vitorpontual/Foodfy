@@ -22,7 +22,9 @@ async function show(request, response, next){
       error: 'User not Found!'
    })
 
+   
    request.user = user
+   console.log(user)
    next()
 }
 async function profile(request, response, next){
@@ -72,9 +74,57 @@ async function post(request, response, next){
 
 }
 
+async function put(request, response, next){
+   const fillAllFields = checkAllFields(request.body)
+   if(fillAllFields){
+      return response.render('admin/users/edit', fillAllFields)
+   }
+
+   let { email } = request.body
+   const user = await User.findOne({where: {email}})
+
+
+   next()
+
+}
+
+async function list(request, response, next){
+   const admin = request.session.isAdmin
+
+   let results = await User.all()
+   const users = results.rows
+   
+   if(!admin){
+      return response.render('admin/users/list', {
+	 users,
+	 error: "Sorry, you can't execute operation"
+      })
+   }
+
+   next()
+}
+
+async function remove(request, response, next){
+   const admin = request.session.isAdmin
+   let results = await User.all()
+   const users = results.rows
+
+   if(!admin){
+      return response.render('admin/users/list',{
+	 users,
+	 error: "Sorry, you not Admin!"
+      })
+   }
+
+   next()
+}
+
+
 module.exports = {
    show,
    post,
-   profile
-
+   put,
+   list,
+   profile,
+   remove
 }

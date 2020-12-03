@@ -1,5 +1,6 @@
 const db = require('../../config/db')
 const { date } = require('../../lib/utils')
+const  fs  = require('fs')
 
 module.exports = {
    all() {
@@ -52,29 +53,54 @@ module.exports = {
       `, [id]
       )
    },
-   update(data) {
-      const query = `
-      UPDATE chefs SET
-      name=($1)
-      WHERE id = $2
-      `
-      const values = [
-         data.name,
-         data.id
-      ]
+   async update(data, id) {
+      try{
+	 const query = `
+	 UPDATE chefs SET
+	 name=($1),
+	 file_id=($2)
+	 WHERE id = $3
+	 `
+	 const value = [
+	    data.name,
+	    id,
+	    data.id
+	 ]
+	 await db.query(query, value)
+	 return
+      }catch(err){
+	 console.log(err)
+      }
 
-      return db.query(query, values)
    },
-   delete(id, callback) {
-      db.query(`DELETE FROM chefs WHERE id = $1`, [id], function (err, results) {
-         if (err) throw `Database Error! ${err}`
+   async delete(id) {
+      try{
 
-         callback()
-      })
+	 const results = await db.query(`
+	 SELECT files.*
+	 FROM files
+	 LEFT JOIN chefs ON (files.id = chefs.file_id)
+	 WHERE chefs.id = $1
+	 `, [id])
+
+	 const files = results.rows
+
+	 files.map( async file => {
+	    fs.unlinkSync(`${file.path}`)
+	    await db.query(`DELETE FROM files
+	    WHERE id = $1`, [file.id])
+	 } )
+	 await db.query(`DELETE FROM chefs WHERE id = $1`, [id])
+      }catch(err){
+	 console.log(err)
+      }
+
    },
    files(id){
       return db.query(`
-         SELECT * FROM files WHERE files.id = $1
+      SELECT * FROM files
+      INNER JOIN chefs ON chefs.file_id = files.id
+      WHERE files.id = $1
       `, [id])
    }
 }

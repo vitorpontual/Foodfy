@@ -86,6 +86,9 @@ section.container .header {
 section.container .cards.index {
    grid-template-columns: 1fr 1fr;
 }
+section.container.chef .cards{
+   grid-template-columns: 1fr 1fr;
+}
 section.container .cards {
    display: grid;
    grid-template-columns:1fr 375px 140px;
@@ -245,6 +248,18 @@ section.profile form .fields .error{
    }
 }
 
+section.forgot form .error {
+   top: 390px;
+   animation: emailforgot 300ms 3s ease-out forwards;
+}
+
+@keyframes emailforgot{
+   to{
+      top: 300px;
+      opacity: 0;
+   }
+}
+
 
 .input .error {
    position: fixed;
@@ -341,12 +356,14 @@ form .item #avatar-upload input {
    width: 344px;
    height: 135px;
    position: absolute;
+   border-radius: 15px;
    top: 12px;
    right: 18px;
    color: white;
    opacity: 100%;
 
    animation: hidemessage 300ms 5s ease-out forwards;
+   z-index: 5;
 }
 
 .messages.error {

@@ -27,17 +27,18 @@ module.exports = {
       chef_id,
       title,
       ingredients,
-      preparation,
+      preparations,
       information,
       created_at
       ) VALUES ($1, $2, $3, $4, $5,$6)
       RETURNING id
       `
+      console.log(data)
       values = [
          data.chef_id,
          data.title,
          data.ingredients,
-         data.preparation,
+         data.preparations,
          data.information,
          date(Date.now()).iso
       ]
@@ -84,7 +85,7 @@ module.exports = {
       chef_id=($1),
       title=($2),
       ingredients=($3),
-      preparation=($4),
+      preparations=($4),
       information=($5)
       WHERE id = ($6)
       `
@@ -93,7 +94,7 @@ module.exports = {
       data.chef_id,
       data.title,
       data.ingredients,
-      data.preparation,
+      data.preparations,
       data.information,
       data.id,
       ]

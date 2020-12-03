@@ -2,16 +2,22 @@ header.login {
       background: none;
 }
 
+section.reset,
+section.forgot,
 section.login.container {
    width: 450px;
 }
 
+section.reset form .header,
+section.forgot form .header,
 section.login.container form .header{ 
    display: flex;
    justify-content: center;
    margin-top: 146px;
 }
 
+section.reset form .header h4,
+section.forgot form .header,
 section.login.container form .header h4 {
    font-size: 24px;
    font-weight: bold;
@@ -28,3 +34,27 @@ section.login.container form .footer a {
    color: #969696;
    font-size: 16px;
 }
+
+section.forgot form .header {
+   display:flex;
+   flex-direction: Column;
+   align-items: center;
+}
+
+section.reset form .item div:first-child,
+section.forgot form .item div:first-child{
+   font-size: 16px;
+   color: #111;
+   margin-top: 35px;
+   margin-bottom: 10px;
+}
+
+section.reset form .button,
+section.forgot form .button {
+   margin: 0;
+   float: right;
+   width: 135px;
+   height: 37px;
+   margin-top: 35px;
+}
+

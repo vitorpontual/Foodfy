@@ -17,7 +17,9 @@ section.users.container .card p {
 }
 
 section.users.container .card .container {
+   display: flex;
    margin-top: 16px;
+   align-items: center;
 }
 section.users.container .card .container a{
    font-size: 14px;

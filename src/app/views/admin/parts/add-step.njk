@@ -1,0 +1,18 @@
+{% macro addStep(title, values, add, step, recipes, id)%}
+<div class="item {{values}}">
+   <div>{{title}}</div>
+      {% if recipes %}
+	 {% for value in recipes %}
+	    <div class='{{add}} input'>
+	       <input placeholder='Adicione' type="text" name='{{values}}[]' value='{{value}}'>
+	    </div>
+	 {% endfor %}
+      {% else %}
+	 <div class='{{add}} input'>
+	    <input placeholder='Adicione' type="text" name='{{values}}[]' value='{{values}}'>
+	 </div>
+      {% endif %}
+   </div>
+<a class='add-button add-{{add}}'>{{step}}</a>
+</div>
+{% endmacro %}

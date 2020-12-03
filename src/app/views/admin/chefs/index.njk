@@ -9,9 +9,9 @@
       </div>
 
       <div class="cards">
-	 {% for card in chefs %}
+	 {% for card in chef %}
 	    <div class='card'>
-	       <img src="{{card.avatar_url}}" alt="{{card.name}}">
+	       <img src="{{card.img}}" alt="{{card.name}}">
 	       <div>
 		  <h1>{{card.name}}</h1>
 		  <a class="link" href="/admin/chefs/{{card.id}}">Visualizar</a>
