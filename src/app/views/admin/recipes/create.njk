@@ -13,6 +13,7 @@
 	    <form id='submit' action="/admin/recipes" method='POST' enctype='multipart/form-data'>
 
 	       {% include './fields.njk' %}
+	       <input type="hidden" name='user_id' value='{{session.userId}}'> 
 	    </form>
 	 </div>
    </section>

@@ -5,7 +5,9 @@
       <div class="header">
 	 <h4>Editar Usuário</h4>
 	 <div class="buttons">
+	    {% if session.isAdmin %}
 	    <button form='form-delete'class="delete-button" type='submit'>Deletar</button>
+	    {% endif %}
 	    <button form='form-put'type="submit">Salvar</button>
 	 </div>
       </div>

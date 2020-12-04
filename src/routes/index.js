@@ -7,7 +7,7 @@ const admin = require('./admin')
 const chefs = require('./chefs')
 const recipes = require('./recipes')
 
-const { onlyUsers } = require('../app/middleware/session')
+const { onlyUsers, isAdmin } = require('../app/middleware/session')
 
 routes.get('/', mainController.index)
 

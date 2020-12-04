@@ -1,5 +1,3 @@
-const User = require('../models/User')
-
 function onlyUsers(request, response, next){
    if(!request.session.userId){
       return response.redirect('/admin/login')
@@ -15,6 +13,10 @@ function isLogged(request, response, next){
 }
 
 async function isAdmin(request, response, next){
+   if(!request.session.isAdmin){
+      return response.redirect('/admin/users')
+
+   }
    next()
 }
 

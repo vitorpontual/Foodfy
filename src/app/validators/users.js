@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Chef = require('../models/chef')
 
 function checkAllFields(body){
    const keys = Object.keys(body)
@@ -42,7 +43,7 @@ async function profile(request, response, next){
       error: "Please, put your password to update your form"
    })
 
-   const user = await User.findOne({where: {id}})
+   const user = await User.findOne(id)
    if(password != user.password) return response.render('admin/users/profile', {
       user: request.body,
       error: "Password Incorrect"
@@ -106,8 +107,7 @@ async function list(request, response, next){
 
 async function remove(request, response, next){
    const admin = request.session.isAdmin
-   let results = await User.all()
-   const users = results.rows
+   let users = await User.all()
 
    if(!admin){
       return response.render('admin/users/list',{
@@ -119,6 +119,27 @@ async function remove(request, response, next){
    next()
 }
 
+async function editMe(request, response, next){
+   const id = request.params.id
+   const user = await User.findOne({where: {id}})
+   const users = await User.all()
+
+   if(request.session.userId == user.id || request.session.isAdmin){
+      if(request.session.isAdmin){
+	 return response.render('admin/users/edit', {user: user})
+      }
+      return response.render('admin/users/profile', {
+	 user
+      })
+   }else{
+      return response.render('admin/users/list', {
+	 users,
+	 error: 'Apenas Administrador ou Próprio Usuário'
+      })
+   }
+
+   
+}
 
 module.exports = {
    show,
@@ -126,5 +147,6 @@ module.exports = {
    put,
    list,
    profile,
-   remove
+   remove,
+   editMe
 }

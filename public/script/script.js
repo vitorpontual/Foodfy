@@ -58,7 +58,7 @@ function addPreparation(){
    const preparations = document.querySelector('.preparations')
    const fieldContainer = document.querySelectorAll('.preparation')
 
-   const newField = fieldContainer[fieldContainer.length - 1].cloneNode(false)
+   const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
 
    if (newField.children[0].value == '') return false 
 

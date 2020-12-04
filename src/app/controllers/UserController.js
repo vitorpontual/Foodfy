@@ -6,11 +6,8 @@ module.exports = {
 
       let user_id = await User.findOne({where: {id}})
       request.session.isAdmin = user_id.is_admin
-      console.log(request.session)
 
-      let results = await User.all()
-      const users = results.rows
-
+      let users = await User.all()
 
       return response.render('admin/users/list', {users})
    },

@@ -22,6 +22,7 @@ exports.index = async (request, response) => {
    let results = await Recipe.pagination(params)
    const allRecipes = results.rows
 
+
    async function getImage(recipeId){
       let results = await Recipe.files(recipeId)
       const files = results.rows.map(file => `${request.protocol}://${request.headers.host}${file.path.replace('public', '')}`)
@@ -36,6 +37,7 @@ exports.index = async (request, response) => {
    } )
 
    const recipes = await Promise.all(recipePromise)
+
 
    if( recipes == ''){
       const paginate = {
@@ -53,10 +55,10 @@ exports.index = async (request, response) => {
 }
 
 exports.show = async (request, response) => {
+   const id = request.params.id
 
+   const recipes = await Recipe.findOne(id)
    
-   let results =  await Recipe.find(request.params.id)
-   const recipes = results.rows[0]
 
    if (!recipes) return response.send('Recipe not found!')
 
@@ -91,6 +93,8 @@ exports.post = async (request, response) => {
       }
 
       if(request.files.length == 0) return response.send('Please, sent at least one image')
+      console.log(request.body)
+
 
       let results = await Recipe.create(request.body)
       const recipeId = results.rows[0].id
@@ -110,8 +114,9 @@ exports.post = async (request, response) => {
 }
 
 exports.edit = async function(request, response){
-   let results = await Recipe.find(request.params.id)
-   const recipes = results.rows[0]
+   const id = request.params.id
+
+   const recipes = await Recipe.findOne(id)
    
    results = await Recipe.chefSelectOption()
    const option = results.rows
@@ -169,16 +174,6 @@ exports.put = async function(request, response) {
 
 exports.delete = async (request, response) => {
    try{
-      
-      let results = await Recipe.find(request.body.id)
-      const recipes = results.rows[0]
-      
-      results = await Recipe.files(recipes.id)
-      let files = results.rows
-      
-      files = files.map(file => {
-         File.delete(file.id)
-      })
       
       await Recipe.delete(request.body.id)
       

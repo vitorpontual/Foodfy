@@ -1,25 +1,21 @@
 const db = require('../../config/db')
 const { date } = require('../../lib/utils')
+const fs = require('fs')
 
 module.exports = {
-   all(){
-
-      const filePath = `ARRAY(
-         SELECT files.path
-         FROM files
-         LEFT JOIN recipe_files ON (recipe_files.file_id = files.id)
-         WHERE recipes.id = recipe_files.recipe_id
-      ) AS file_path`
+   async all(){
 
       const query = `
-      SELECT recipes.*, chefs.name As chefs_name, ${filePath}
+      SELECT recipes.*, chefs.name As chefs_name
       FROM recipes
       LEFT JOIN chefs ON (recipes.chef_id = chefs.id)
       ORDER BY recipes.id
       `
 
 
-      return db.query(query)
+
+      const results = await db.query(query)
+      return results.rows
    },
    create(data){
       query = `
@@ -29,8 +25,9 @@ module.exports = {
       ingredients,
       preparations,
       information,
-      created_at
-      ) VALUES ($1, $2, $3, $4, $5,$6)
+      created_at,
+      user_id
+      ) VALUES ($1, $2, $3, $4, $5,$6, $7)
       RETURNING id
       `
       console.log(data)
@@ -40,26 +37,25 @@ module.exports = {
          data.ingredients,
          data.preparations,
          data.information,
-         date(Date.now()).iso
+	 date(Date.now()).iso,
+	 data.user_id,
+
+	 
       ]
 
       return db.query(query, values)
 
    },
-   find(id){
-      const filePath = `ARRAY(
-         SELECT files.path
-         FROM files
-         LEFT JOIN recipe_files ON (recipe_files.file_id = files.id)
-         WHERE recipes.id = recipe_files.recipe_id
-      )`
-
-      return db.query(`
-      SELECT recipes.*, chefs.name AS chef_name, ${filePath} 
+   async findOne(id){
+      const query = `
+      SELECT recipes.*, chefs.name as chefs_name
       FROM recipes
       LEFT JOIN chefs ON chefs.id = recipes.chef_id
       WHERE recipes.id = $1
-      `, [id])
+      `
+
+      const results = await db.query(query, [id])
+      return results.rows[0]
    },
    findBy(filter){
       const filePath = `(
@@ -103,11 +99,22 @@ module.exports = {
       return db.query(query, values)
    },
    async delete(id){
-      await db.query(`DELETE FROM recipe_files 
-      WHERE recipe_files.recipe_id = $1;
+      let results = await db.query(`
+      SELECT * FROM files
+      INNER JOIN recipe_files ON recipe_files.file_id = files.id
+      WHERE recipe_files.recipe_id = $1
       `, [id])
 
-      return db.query(`DELETE FROM recipes WHERE recipes.id = $1`, [id])
+      const files = results.rows.map( async file => {
+	 try{ 
+	    fs.unlinkSync(file.path)
+	    await db.query(`DELETE FROM files WHERE id = $1`, [file.file_id])
+	 }catch(err){
+	    console.error(err)
+	 }
+      })
+
+      return db.query(`DELETE FROM recipes WHERE id = $1`, [id])
    },
    pagination(params){
       const { filter, limit, offset} = params

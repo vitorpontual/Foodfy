@@ -4,8 +4,9 @@ const mailer = require('../../lib/mailer')
 const { randomPassword } = require('../../lib/utils')
 
 module.exports = {
-   all(){
-      return db.query(`SELECT * FROM users`)
+   async all(){
+      const results = await db.query(`SELECT * FROM users`)
+      return results.rows
    },
    async create(data){
       query = `
