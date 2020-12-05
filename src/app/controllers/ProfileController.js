@@ -4,21 +4,28 @@ module.exports = {
    index(request, response){
       const { user } = request
 
+
       user.firstName = user.name.split(' ')[0]
-      
-      console.log(user)
 
       return response.render('admin/users/profile', {user})
    },
    async put(request, response){
       try{
-	 const {user} = request
-	 let {name, email} = request.body
+	 const {id: userId, email: userEmail} = request.user
+	 const { name, email } = request.body
+	 
 
-	 await User.update(user.id, {
-	    name,
-	    email
-	 })
+	 if(email == userEmail){
+	    await User.update(userId, {
+	       name
+	    })
+	 } else {
+	    await User.update(userId, {
+	       name,
+	       email
+	    })
+	 }
+
 
 	 return response.render('admin/users/profile', {
 	    user: request.body,

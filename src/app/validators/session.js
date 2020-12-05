@@ -20,7 +20,6 @@ async function login(request, response, next){
    }
 
    request.user = user
-   console.log(request.user)
    next()
 }
 

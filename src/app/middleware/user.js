@@ -20,8 +20,9 @@ async function verifyEdit(request, response, next){
    } )
 
    const recipes = await Promise.all(recipePromise)
+   console.log(request.session.userId, recipe.user_id)
 
-   if(recipe.user_id != request.session.userId || !request.session.isAdmin){
+   if(recipe.user_id != request.session.userId && !request.session.isAdmin){
       return response.render('admin/recipes/index', {
 	 recipes,
 	 error: 'Sem permissão para editar!'

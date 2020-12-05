@@ -17,6 +17,11 @@
    align-items: center;
 }
 
+#user-page nav a:last-child{
+   display:flex;
+   align-items: center;
+}
+
 #user-page nav a {
    position: relative;
    color: #111;

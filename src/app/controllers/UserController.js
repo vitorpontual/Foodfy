@@ -8,6 +8,12 @@ module.exports = {
       request.session.isAdmin = user_id.is_admin
 
       let users = await User.all()
+      users.map(user => {
+	 user.firstName = user.name.split(' ')[0]
+
+	 return user
+      })
+
 
       return response.render('admin/users/list', {users})
    },
@@ -16,16 +22,23 @@ module.exports = {
    },
    async post(request, response){
 
-      let userId = await User.create(request.body)
+      let user = await User.create(request.body)
+      let users = await User.all()
 
 
-      return response.redirect(`/admin/users`)
+      return response.render(`admin/users/list`, {
+	 users,
+	 sucess: 'User Criado com Sucesso!'
+      })
       
    },
    async show(request, response){
       const { id } = request.params
 
       const user = await User.findOne({where: {id}})
+      console.log(user.id, request.session.userId)
+
+      user.firstName = user.name.split(' ')[0]
 
       return response.render('admin/users/edit', { user })
    },

@@ -29,6 +29,7 @@ header div.container .navbar {
    display: flex;
    justify-content: center;
    align-items: center;
+   min-width: 600px;
 }
 
 header div.container .navbar a {
@@ -38,6 +39,7 @@ header div.container .navbar a {
    line-height: 19px;
    text-decoration: none;
 }
+
 
 header div.container .navbar a + a {
    margin-left: 15px;

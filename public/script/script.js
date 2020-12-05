@@ -1,6 +1,6 @@
 const buttons = document.querySelectorAll('.details .botao')
 const hidden = document.querySelectorAll('.hide')
-const cards = document.querySelectorAll('.recipes-page .card,#user-page .index .card')
+const cards = document.querySelectorAll('.recipes-page .card, #user-page .index .card')
 
 for ( let card of cards) {
     card.addEventListener("click", function(){
@@ -22,7 +22,7 @@ for (let i = 0; i < buttons.length; i++) {
 }
 
 const currentPage = location.pathname
-const menuItems = document.querySelectorAll('nav a, .navbar a')
+const menuItems = document.querySelectorAll('nav a, .navbar a:not(:first-child)')
 
 for (let item of menuItems){
    if (currentPage.includes(item.getAttribute('href'))){

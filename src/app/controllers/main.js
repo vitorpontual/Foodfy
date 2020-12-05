@@ -5,8 +5,7 @@ const file = require('../models/file')
 
 exports.index = async function(request, response){
    try {
-      let results = await Recipe.all()
-      const recipes = results.rows
+      let recipes = await Recipe.all()
 
       if(!recipes) return response.send("Recipe not Found!")
 
@@ -40,7 +39,6 @@ exports.search = async function(request, response){
 
    if(!allRecipes) return response.send('Recipes not Found!')
 
-   console.log(results.rows)
 
    async function getImage(recipeId){
       let results = await Recipe.files(recipeId)
@@ -56,10 +54,7 @@ exports.search = async function(request, response){
    })
 
 
-   console.log(recipePromise)
-
    const recipes = await Promise.all(recipePromise)
-
 
 
    return response.render('general/search', {recipes, filter})
@@ -91,13 +86,13 @@ exports.recipes = async function (request, response) {
 
    allRecipes.map(recipe => {
       const {array} = recipe
+      console.log(array)
       recipes.push({
          ...recipe,         
          img: `${request.protocol}://${request.headers.host}${array[0].replace('public', '')}` 
       })
    })
 
-   console.log(recipes)
 
    if( recipes == ''){
       const paginate = {
@@ -113,8 +108,8 @@ exports.recipes = async function (request, response) {
    }
 }
 exports.recipesIndex = async function (request, response) {
-   let results = await Recipe.find(request.params.id)
-   const recipes = results.rows[0]
+   const recipes = await Recipe.findOne(request.params.id) 
+   console.log(recipes)
 
    if(!recipes) return response.send('Recipe not found')
 
@@ -131,7 +126,21 @@ exports.chefs = async function(request, response) {
    let results = await Chef.all()
    const chefs = results.rows
 
+   async function getImage(id){
+      let results = await Chef.files(id)
+      const files = results.rows.map(file => `${request.protocol}://${request.headers.host}${file.path.replace('public', '')}`)
 
-   return response.render('general/chefs', {chefs})
+      return files[0]
+   }
+
+   const chefPromise = chefs.map( async file => {
+      file.img = await getImage(file.file_id)
+      return file
+   } )
+
+   const chef = await Promise.all(chefPromise)
+
+
+   return response.render('general/chefs', {chefs: chef})
   
 }

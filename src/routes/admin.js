@@ -28,10 +28,10 @@ routes.put('/profile', onlyUsers, UserValidator.profile, ProfileController.put)
 // User Admin
 routes.get('/users', onlyUsers, UserController.list)
 routes.get('/create', onlyUsers, isAdmin, UserController.create)
-routes.get('/users/:id', onlyUsers,UserValidator.editMe, UserController.show )
+routes.get('/users/:id', onlyUsers, UserValidator.editMe, UserController.show )
 
 routes.post('/users', onlyUsers, isAdmin, UserValidator.post, UserController.post)
 routes.put('/users',onlyUsers, UserValidator.put,  UserController.put)
-routes.delete('/users', onlyUsers, isAdmin, UserController.delete)
+routes.delete('/users', onlyUsers, isAdmin, UserValidator.otherAdmin, UserController.delete)
 
 module.exports = routes
