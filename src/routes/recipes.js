@@ -16,6 +16,7 @@ routes.get('/:id/edit', verify.verifyEdition, Recipes.edit)
 
 routes.post('/',multer.array('photos', 5), validator.post,  Recipes.post)
 routes.put('/', multer.array('photos', 5), validator.put, Recipes.put)
+routes.delete('/', Recipes.delete)
 
 
 

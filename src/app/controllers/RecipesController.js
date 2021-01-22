@@ -134,5 +134,21 @@ module.exports = {
       }catch(err){
 	 console.error(err)
       }
+   },
+   async delete(request, response){
+      try{
+
+	 const files = await Recipe.file(request.body.id)
+	 files.map(async file => {
+	    fs.unlinkSync(file.path)
+	    await File.delete(file.file_id)
+	 })
+	 await Recipe.delete(request.body.id)
+
+
+	 return response.redirect('/admin/recipes')
+      }catch(err){
+	 console.error(err)
+      }
    }
 }
