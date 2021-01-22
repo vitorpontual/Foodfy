@@ -5,9 +5,7 @@
    <section class="users container">
       <div class="header">
 	 <h1>Usuário</h1>
-	 {% if session.isAdmin %}
 	 <a class='button' href="/admin/create">Novo</a>
-	 {% endif %}
       </div>
       <div class="cards">
 	 {% for user in users%}

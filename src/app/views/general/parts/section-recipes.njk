@@ -6,9 +6,9 @@
    <div class="cards">
       {% for recipe in recipes %}
 	 <div class="card" id='{{recipe.id}}'>
-	    <img src="{{recipe.img}}" alt="{{recipe.title}}">
+	    <img src="{{recipe.img}}" alt="{{recipe.title}}" onclick="showRecipe()">
 	    <h4>{{recipe.title}}</h4>
-	    <p>por {{recipe.chefs_name}}</p>
+	    <p>por {{recipe.chef}}</p>
 	 </div>
       {%endfor%}
    </div>

@@ -1,22 +1,42 @@
 {% extends './layout.njk' %}
 
+{% block style%}
+   <link rel="stylesheet" href="/css/admin/gallery.css">
+{% endblock style%}
 {% block content %}
    <section class="container details">
-        <div class="banner">
-            <img src="{{files[0].img}}" alt="{{items.title}}">
-        </div>
-
-        <div class="info">
-            <h4>{{recipes.title}}</h4>
-            <p class="author">por {{recipes.chefs_name}}</p>
-        </div>
+      <div class="content">
+         <div class="gallery">
+	    <div class="highlight">
+	       {% if not recipes.img %}
+		  <img src="http://placehold.it/500x500?text=NOT RECIPE">
+	       {%else%}
+		  <img src="{{recipes.img}}" alt="{{recipe.title}}"
+					    onclick='Lightbox.open()'>
+	       {%endif%}
+	       <div class="lightbox-target">
+		  <img src="{{recipes.img}}" alt="{{recipes.title}}">
+		  <a href="#" class='lightbox-close' onclick='Lightbox.close()'><i class="material-icons">close</i></a>
+	       </div>
+	    </div>
+	    <div class="gallery-preview">
+	       {% for image in recipes.files %}
+		  <img src="{{image.src}}" alt="{{image.name}}"
+		  {%if loop.index0 == 0%}
+		     class='active'
+		  {% endif %}
+		  onclick='ImageGallery.setImage(event)'>
+		  {%endfor%}
+	    </div>
+         </div>
+      </div>
 
         <div class="instructions">
 
             <div class="ingredients">
                 <div class="title">
                     <h4>Ingredientes</h4>
-                    <button class='botao'>ESCONDER</button>
+                    <button class='botao' >ESCONDER</button>
                 </div>
                 <div class="hide">
                     {% for ingredient in recipes.ingredients %}
@@ -33,9 +53,9 @@
                     <button class='botao'>ESCONDER</button>
                 </div>
                 <div class="hide">
-                    {% for item in recipes.preparations %}
+                    {% for preparation in recipes.preparations %}
                     <ul>
-                        <li>{{item}}</li>
+                        <li>{{preparation}}</li>
                     </ul>
                     {% endfor %}
                 </div>
@@ -51,5 +71,6 @@
         </div>
 
    </section>
-   <script src='/script.js'></script>
+   
+   <script src="/script/script_image.js"></script>
 {% endblock content%}

@@ -16,8 +16,8 @@ Modo de preparo
         <i class='material-icons'>add</i>
     </div>
     <div id="photos-preview">
-      {% if files %}
-      {% for image in files %}
+      {% if recipes.files %}
+      {% for image in recipes.files %}
         <div id="{{image.id}}" class='photo'>
           <img src="{{image.src}}" alt="{{image.name}}">
           <i class="material-icons"
@@ -30,14 +30,6 @@ Modo de preparo
     </div>
   </div>
 </div>
-<!-- 
-<div class="item">
-  <div>Imagem da receita</div>
-    <div>
-      <input type="url" name="image" placeholder="https://" value="{{recipes.image}}">
-    </div>
-</div>
--->
 <div class="item">
   <div>Título</div>
     <div>
@@ -59,9 +51,9 @@ Modo de preparo
 </div>
 
 
-{{step.addStep('ingredientes', 'ingredients','ingredient', 'Adicione novo ingrediente', recipes.ingredients, recipes.id)}}
+{{step.addStep('ingredientes', 'ingredients','ingredient', 'Adicione novo ingrediente', recipes.ingredients)}}
 
-{{step.addStep('Modo de preparo', 'preparations', 'preparation', 'Adicionar novo passo', recipes.preparations, recipes.id)}}
+{{step.addStep('Modo de preparo', 'preparations', 'preparation', 'Adicionar novo passo', recipes.preparations)}}
 
 
 <div class="item">

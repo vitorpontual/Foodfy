@@ -160,7 +160,7 @@ section.container button {
    text-align: center;
 }
 
-section.container.profile .delete-button {
+section.container .delete-button {
    background-color: red;
 }
 
@@ -265,7 +265,7 @@ section.forgot form .error {
 
 .input .error {
    position: fixed;
-   top: 379px;
+   top: 385px;
    z-index: 1;
    background: #e74c3c;
    padding: 4px;
@@ -354,6 +354,7 @@ form .item #avatar-upload input {
    display: flex;
    justify-content: center;
    align-items: center;
+   text-align: center;
 
    width: 344px;
    height: 135px;

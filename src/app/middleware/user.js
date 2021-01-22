@@ -1,37 +1,21 @@
-const Recipe = require('../models/recipe')
+const Recipe = require('../models/Recipe')
+const LoadRecipe = require('../services/LoadRecipeService')
 
-async function verifyEdit(request, response, next){
-   const { id } = request.params
+async function verifyEdition(request, response, next) {
+    const recipe = await LoadRecipe.load('recipe', { where: { id: request.params.id } })
 
-   const recipe = await Recipe.findOne(id)
-   const allRecipes = await Recipe.all()
+    const recipes = await LoadRecipe.load('recipes')
+    console.log(request.headers.referer)
 
-   async function getImage(recipeId){
-      let results = await Recipe.files(recipeId)
-      const files = results.rows.map(file => `${request.protocol}://${request.headers.host}${file.path.replace('public', '')}`)
-
-      return files[0]
-   }
-
-   const recipePromise = allRecipes.map( async recipe => {
-      recipe.img = await getImage(recipe.id)
-
-      return recipe
-   } )
-
-   const recipes = await Promise.all(recipePromise)
-   console.log(request.session.userId, recipe.user_id)
-
-   if(recipe.user_id != request.session.userId && !request.session.isAdmin){
-      return response.render('admin/recipes/index', {
-	 recipes,
-	 error: 'Sem permissão para editar!'
-      })
-   }
-
-   next()
+    if (recipe.user_id != request.session.userId && request.session.isAdmin == false) {
+        request.session.error = 'Você não está autorizado a editar receita de outros usúarios.'
+        console.log(request.session)
+        return response.redirect(`${request.headers.referer}`)
+    }
+    next()
 }
 
+
 module.exports = {
-   verifyEdit
+    verifyEdition,
 }

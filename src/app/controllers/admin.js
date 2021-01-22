@@ -93,20 +93,18 @@ exports.post = async (request, response) => {
       }
 
       if(request.files.length == 0) return response.send('Please, sent at least one image')
-      console.log(request.body)
 
 
       let results = await Recipe.create(request.body)
-      const recipeId = results.rows[0].id
 
       const filePromise = request.files.map(file => File.createRecipeFiles({
          ...file,
-         recipe_id: recipeId
+         recipe_id: results
       }))
 
       await Promise.all(filePromise)
-
-      return response.redirect(`/admin/recipes/${recipeId}`)
+      
+      return response.redirect(`/admin/recipes/${results}`)
    } catch(err){
       console.log(`Error => ${err}`)
    }
@@ -136,8 +134,6 @@ exports.edit = async function(request, response){
 
 exports.put = async function(request, response) {
 
-   console.log(request.body)
-   console.log(request.files)
    const keys = Object.keys(request.body)
 
    for(key of keys){

@@ -17,7 +17,7 @@ module.exports = {
       const results = await db.query(query)
       return results.rows
    },
-   create(data){
+   async create(data){
       query = `
       INSERT INTO recipes (
       chef_id,
@@ -38,11 +38,13 @@ module.exports = {
          data.information,
 	 date(Date.now()).iso,
 	 data.user_id,
-
-	 
       ]
+      console.log(query)
+      console.log(values)
 
-      return db.query(query, values)
+      let results = await db.query(query, values)
+      return results.rows[0].id
+
 
    },
    async findOne(id){

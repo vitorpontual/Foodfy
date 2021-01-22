@@ -20,8 +20,9 @@ async function isAdmin(request, response, next){
    next()
 }
 
+
 module.exports = {
    onlyUsers,
    isLogged,
-   isAdmin
+   isAdmin,
 }

@@ -21,11 +21,12 @@ const PhotosUploads = {
                 const container = PhotosUploads.getContainer(image)
                 PhotosUploads.preview.appendChild(container)
             }
+	   console.log(reader)
 
             reader.readAsDataURL(file)
         })
 
-        PhotosUploads.handleFileInput.files = PhotosUploads.getAllFiles()
+        PhotosUploads.input.files = PhotosUploads.getAllFiles()
     },
     hasLimit(event){
         const { uploadLimit, input, preview } = PhotosUploads

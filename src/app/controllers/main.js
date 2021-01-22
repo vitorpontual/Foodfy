@@ -65,51 +65,11 @@ exports.about = (request, response) => {
 }
 
 exports.recipes = async function (request, response) {
-   let { filter, page, limit} = request.query
-
-
-   page = page || 1
-   limit = limit || 6
-   let offset = limit * (page - 1)
-
-   const params = {
-      filter, 
-      page,
-      limit,
-      offset,
-   }
-   
-   let results = await Recipe.pagination(params)
-   const allRecipes = results.rows
-
-   recipes = []
-
-   allRecipes.map(recipe => {
-      const {array} = recipe
-      console.log(array)
-      recipes.push({
-         ...recipe,         
-         img: `${request.protocol}://${request.headers.host}${array[0].replace('public', '')}` 
-      })
-   })
-
-
-   if( recipes == ''){
-      const paginate = {
-         page
-      }
-      return response.render('general/recipes', {recipes, paginate, filter})
-   } else {
-      const paginate = {
-         total: Math.ceil(recipes[0].total/ limit),
-         page
-      }
-      return response.render('general/recipes', {recipes, paginate, filter})
-   }
+ 
+   return
 }
 exports.recipesIndex = async function (request, response) {
    const recipes = await Recipe.findOne(request.params.id) 
-   console.log(recipes)
 
    if(!recipes) return response.send('Recipe not found')
 

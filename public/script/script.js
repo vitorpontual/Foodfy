@@ -1,24 +1,28 @@
-const buttons = document.querySelectorAll('.details .botao')
+const hiddenButton = document.querySelectorAll('.details .botao')
 const hidden = document.querySelectorAll('.hide')
-const cards = document.querySelectorAll('.recipes-page .card, #user-page .index .card')
 
-for ( let card of cards) {
-    card.addEventListener("click", function(){
-        const recipe = card.getAttribute("id")
-       window.location.href = `http://localhost:5000/recipes/${recipe}`
+for (let i = 0; i < hiddenButton.length; i++) {
+    hiddenButton[i].addEventListener('click', () => {
+
+	if (hiddenButton[i].textContent == 'ESCONDER') {
+	    hiddenButton[i].innerHTML = 'MOSTRAR'
+	    hidden[i].classList.add('active')
+	} else {
+	    hiddenButton[i].innerHTML = 'ESCONDER'
+	    hidden[i].classList.remove('active')
+	}
     })
 }
-for (let i = 0; i < buttons.length; i++) {
-    buttons[i].addEventListener('click', () => {
 
-        if (buttons[i].textContent == 'ESCONDER') {
-            buttons[i].innerHTML = 'MOSTRAR'
-            hidden[i].classList.add('active')
-        } else {
-            buttons[i].innerHTML = 'ESCONDER'
-            hidden[i].classList.remove('active')
-        }
-    })
+function showRecipe(){
+   const cards = document.querySelectorAll('.recipes-page .card, .index .card, .container .cards .card')
+
+   for ( let card of cards) {
+       card.addEventListener("click", function(){
+	   const recipe = card.getAttribute("id")
+	  window.location.href = `http://localhost:5000/recipes/${recipe}`
+       })
+   }
 }
 
 const currentPage = location.pathname

@@ -6,6 +6,6 @@
       {% include './parts/filter.njk'%}
       {% endblock filter%}
       {% block content %}
-	 {{section.recipes('Buscando por ', filter,'grid', recipes)}}
+	 {{section.recipes('Buscando por ', search.term,'grid', recipes)}}
    </section>
 {% endblock content %}
