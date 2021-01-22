@@ -1,4 +1,4 @@
-const db = require('../../config/db')
+   const db = require('../../config/db')
 
 function find(filters, table){
    let query = `SELECT * FROM ${table}`
@@ -49,7 +49,6 @@ const Base = {
 	 (${keys.join(',')}
 	 )VALUES (${values.join(',')})
 	 RETURNING id`
-	 console.log(query)
 
 	 const results = await db.query(query)
 	 return results.rows[0].id

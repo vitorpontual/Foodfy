@@ -39,13 +39,9 @@ module.exports = {
 	 date(Date.now()).iso,
 	 data.user_id,
       ]
-      console.log(query)
-      console.log(values)
 
       let results = await db.query(query, values)
       return results.rows[0].id
-
-
    },
    async findOne(id){
       const query = `

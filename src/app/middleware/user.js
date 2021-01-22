@@ -9,7 +9,6 @@ async function verifyEdition(request, response, next) {
 
     if (recipe.user_id != request.session.userId && request.session.isAdmin == false) {
         request.session.error = 'Você não está autorizado a editar receita de outros usúarios.'
-        console.log(request.session)
         return response.redirect(`${request.headers.referer}`)
     }
     next()

@@ -10,10 +10,10 @@
 	 </div>
 	 <div>
 	    <h1>{{recipe.title}}</h1>
-	    {% if recipe.chefs_name == null %}
+	    {% if recipe.chef == null %}
 	       <h2>por Anônimo</h2>
 	    {% else %}
-	    <h2>por {{recipe.chefs_name}}</h2>
+	    <h2>por {{recipe.chef}}</h2>
 	    {%endif%}
 	    <a class='link' href="/admin/recipes/{{recipe.id}}">Visualizar</a>
 	 </div>
