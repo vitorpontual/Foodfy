@@ -4,13 +4,13 @@
 
    <section class="container chef">
       <div class=header>
-	 <h1>Chef: {{chefs.name}}</h1>
+	 <h1>Chef: {{chefs.name.split(' ')[0].toUpperCase()}}, {{chefs.name.split(' ')[1]}}</h1>
 	 <button class="add-chef-button" onclick='window.location.href="/admin/chefs/{{chefs.id}}/edit"' type='submit'>Editar Chef</button>
       </div>
 
       <div class="profile">
 	 <div class='avatar' 
-	      style='background: url({{chefs.src}}) no-repeat center center/ cover;
+	      style='background: url({{chefs.img}}) no-repeat center center/ cover;
 	      background-size: 304px;' 
 	      alt="{{chefs.name}}">
 	 </div>
@@ -24,7 +24,7 @@
 	 {% for recipe in recipesChefs %}
 	    <div class="card">
 	       <div>
-		  <img src="{{recipe.image}}" alt="{{recipe.title}}">
+		  <img src="{{recipe.img}}" alt="{{recipe.title}}">
 	       </div>
 	       <div>
 		  <h1>{{recipe.title}}</h1>
