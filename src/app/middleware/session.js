@@ -14,7 +14,8 @@ function isLogged(request, response, next){
 
 async function isAdmin(request, response, next){
    if(!request.session.isAdmin){
-      return response.redirect('/admin/users')
+      request.session.error = 'Apenas Adminstradores podem realizar está operação!'
+      return response.redirect(`${request.headers.referer}`)
 
    }
    next()
