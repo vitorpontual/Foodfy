@@ -80,10 +80,7 @@ async function put(request, response, next){
       return response.render('admin/users/edit', fillAllFields)
    }
 
-   let { email } = request.body
-   const user = await User.findOne({where: {email}})
-
-
+   request.session.sucess = 'Usúario atualizado com sucesso!'
    next()
 
 }
@@ -91,8 +88,7 @@ async function put(request, response, next){
 async function list(request, response, next){
    const admin = request.session.isAdmin
 
-   let results = await User.all()
-   const users = results.rows
+   let users = await User.findAll()
    
    if(!admin){
       return response.render('admin/users/list', {
@@ -106,7 +102,7 @@ async function list(request, response, next){
 
 async function remove(request, response, next){
    const admin = request.session.isAdmin
-   let users = await User.all()
+   let users = await User.findAll()
 
    if(!admin){
       return response.render('admin/users/list',{
@@ -121,7 +117,7 @@ async function remove(request, response, next){
 async function editMe(request, response, next){
    const id = request.params.id
    const user = await User.findOne({where: {id}})
-   const users = await User.all()
+   const users = await User.findAll()
 
    user.firstName = user.name.split(' ')[0]
 

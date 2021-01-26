@@ -379,7 +379,7 @@ form .item #avatar-upload input {
 
 @keyframes hidemessage {
    to {
-      top: -50px;
+      top: -150px;
       opacity: 0;
    }
 }

@@ -1,41 +1,79 @@
 const User = require('../models/User')
 
+const { hash } = require('bcryptjs')
+const mailer = require('../../lib/mailer')
+const { randomPassword } = require('../../lib/utils')
+
 module.exports = {
    async list(request, response) {
-      let users = await User.all()
-      users.map(user => {
-         user.firstName = user.name.split(' ')[0]
+      try{
+	 const error = request.session.error
+	 request.session.error = ''
+	 const sucess = request.session.sucess
+	 request.session.sucess = ''
+	 let users = await User.findAll()
 
-         return user
-      })
-
-
-      return response.render('admin/users/list', { users })
+	 return response.render('admin/users/list', { users, error, sucess })
+      }catch(err){
+	 console.error(err)
+      }
    },
    create(request, response) {
-      return response.render('admin/users/create')
+      const error = request.session.error
+      request.session.error = ''
+      return response.render('admin/users/create', { error })
    },
    async post(request, response) {
+      try{
+	 let { name, email, password, is_admin } = request.body
 
-      let user = await User.create(request.body)
-      let users = await User.all()
+	 const firstPassword = randomPassword(8)
+
+	 await mailer.sendMail({
+	    to: email,
+	    from: 'no-replay@foodfy.com.br',
+	    subject: 'Sua senha de Acesso',
+	    html: `
+	    <h2>Olá, ${name}</h2>
+	    <p>Sua senha para acessar a administração do Foodfy é:</p>
+	    <p><strong>${firstPassword}</strong></p>
+	    `
+	 })
+
+	 const passwordHash = await hash(firstPassword, 8)
+
+	 await User.create({
+	    name,
+	    email,
+	    password: passwordHash,
+	    is_admin: is_admin || 0
+	 })
+
+	 const users = await User.findAll()
+
+	 return response.render('admin/users/list', {
+	    users,
+	    sucess: 'Usuário criado com sucesso!'
+	 })
 
 
-      return response.render(`admin/users/list`, {
-         users,
-         sucess: 'User Criado com Sucesso!'
-      })
 
+      }catch(err){
+	 console.log(err)
+      }
    },
    async show(request, response) {
-      const { id } = request.params
+      try{
+	 const { id } = request.params
 
-      const user = await User.findOne({ where: { id } })
-      console.log(user.id, request.session.userId)
+	 const user = await User.findOne({ where: { id } })
 
-      user.firstName = user.name.split(' ')[0]
+	 user.firstName = user.name.split(' ')[0]
 
-      return response.render('admin/users/edit', { user })
+	 return response.render('admin/users/edit', { user })
+      }catch(err){
+	 console.error(err)
+      }
    },
    async put(request, response) {
       try {
@@ -46,13 +84,9 @@ module.exports = {
             email,
             is_admin: request.body.is_admin || 0
          })
-
-         return response.render('admin/users/edit', {
-            user: request.body,
-            sucess: 'Account Updated'
-         })
+	 return response.redirect('/admin/users')
       } catch (err) {
-         console.log(err)
+         console.error(err)
       }
    },
    async delete(request, response) {
