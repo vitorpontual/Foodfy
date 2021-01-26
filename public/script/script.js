@@ -42,24 +42,28 @@ function checkRemove(event){
 }
 
 function addIngredient(){
-   const ingredients = document.querySelector(".ingredients")
+   const ingredients = document.querySelector(".ingredients.new")
    const fieldContainer = document.querySelectorAll('.ingredient')
 
    const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
+   console.log(newField)
    if(newField.children[0].value == '') return true 
 
    newField.children[0].value = ''
    ingredients.appendChild(newField)
 }
 
-document
-   .querySelector('.add-ingredient')
-   .addEventListener('click', addIngredient)
+function remove(event){
+   const list = document.querySelector(`${event}`)
+   let c = document.querySelector(`${event}`).childElementCount
+   if(c >= 2)
+      list.removeChild(list.lastChild)
+}
 
 // add prepare
 
 function addPreparation(){
-   const preparations = document.querySelector('.preparations')
+   const preparations = document.querySelector('.preparations.new')
    const fieldContainer = document.querySelectorAll('.preparation')
 
    const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)

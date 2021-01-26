@@ -28,11 +28,15 @@ section.container.chef .profile {
 
 
 section.container.chef .profile .avatar {
+   margin: 0 auto;
+}
+section.container.chef .profile .avatar img {
    width: 200px;
    height: 200px;
    border-radius: 50%;
    justify-self: center;
    margin-bottom: 24px;
+   object-fit: cover;
 }
 
 section.container.chef .profile h1 {

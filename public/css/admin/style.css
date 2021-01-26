@@ -2,6 +2,10 @@
    display:flex;
    justify-content: center;
 }
+
+.pagination a + a {
+   margin-left: 16px;
+}
 .pagination a,
 .pagination span {
    color: #6558C3;

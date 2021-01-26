@@ -60,7 +60,15 @@ module.exports = {
    },
    async chefs(request, response){
       const chefs = await LoadChef.load('chefs')
+      const total = await Chef.totalRecipe()
 
-      return response.render('general/chefs', {chefs})
+      total.map((recipes, index) => {
+	 chefs.map(chef => {
+	    if(chef.name == recipes.name)
+	       chef.total = recipes.total_recipes
+	 })
+      })
+
+      return response.render('general/chefs', {chefs, total})
    }
 }

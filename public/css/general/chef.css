@@ -8,10 +8,7 @@ section.chef.container {
 section.chef.container .card {
    display: grid;
    grid-template-columns: 64px 1fr;
-}
-
-section.chef.container .card + .card {
-   margin-left: 16px;
+   padding-top: 16px;
 }
 
 section.chef.container .card div {

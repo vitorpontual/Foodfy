@@ -164,13 +164,24 @@ section.container .delete-button {
    background-color: red;
 }
 
+section.container .btn-group {
+   display:flex;
+   justify-content: space-between;
+   padding:0 16px
+}
+section.container .btn-group .remove-ingredient,
+section.container .btn-group .remove-preparation{
+   font-size: 16px;
+   font-weight: bold;
+   cursor: pointer;
+   color: red;
+}
 
 section.container .add-button {
    font-size: 16px;
    font-weight: bold;
    color: var(--primary-color);
    cursor: pointer;
-   margin-left: 14px;
 }
 
 section.container.edit-recipe .header .buttons .delete-button {

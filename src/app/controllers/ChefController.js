@@ -53,6 +53,7 @@ module.exports = {
 	       }
 	    }
 	 )
+	 chefs.recipeCount = recipesChefs.length
 
 	 return response.render('admin/chefs/show', {chefs, recipesChefs, error})
       }catch(err){

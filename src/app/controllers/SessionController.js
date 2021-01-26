@@ -21,9 +21,8 @@ module.exports = {
       return response.render('admin/session/forgot-password')
    },
    async forgot(request, response){
-	 const user = request.user
       try{
-
+	 const user = request.user
 	 // Token para o usuário
 	 const token = crypto.randomBytes(20).toString('hex')
 

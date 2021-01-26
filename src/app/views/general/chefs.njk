@@ -7,7 +7,11 @@
 	    <img src="{{chef.img}}" alt="{{chef.name}}">
 	    <div>
 	       <h2>{{chef.name}}</h2>
-	       <p>{{chef.total_recipes}} Receitas</p>
+	       {% if chef.total <= 1%}
+	       <p>{{chef.total}} Receita</p>
+	       {% else%}
+	       <p>{{chef.total}} Receitas</p>
+	       {%endif%}
 	    </div>
 	 </div>
 	 {% endfor %}

@@ -129,10 +129,8 @@ async function editMe(request, response, next){
 	 user
       })
    }else{
-      return response.render('admin/users/list', {
-	 users,
-	 error: 'Apenas Administrador ou Próprio Usuário'
-      })
+      request.session.error = 'Apenas Administrador ou Próprio Usuário'
+      return response.redirect('/admin/users')
    }
 }
 

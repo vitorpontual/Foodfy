@@ -10,7 +10,7 @@ module.exports = {
       let {page, limit} = request.query
 
       page = page || 1
-      limit = limit || 4
+      limit = limit || 6
       let offset = limit * ( page - 1 )
 
       const params = {
@@ -64,7 +64,9 @@ module.exports = {
 	 let chefsOption = await Chef.findAll()
 	 const error = request.session.error
 	 request.session.error = ''
-	 return response.render('admin/recipes/create', {chefsOption, error})
+	 const body = request.session.body
+	 request.session.body = ''
+	 return response.render('admin/recipes/create', {chefsOption, error, body})
 
       }catch(err){
 	 console.error(err)

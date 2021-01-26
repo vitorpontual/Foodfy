@@ -9,17 +9,15 @@
       </div>
 
       <div class="profile">
-	 <div class='avatar' 
-	      style='background: url({{chefs.img}}) no-repeat center center/ cover;
-	      background-size: 304px;' 
-	      alt="{{chefs.name}}">
+	 <div class='avatar'>
+	    <img src="{{chefs.img}}" alt="{{chefs.name}}">
 	 </div>
 	 <h1>{{chefs.name}}</h1>
-	 <h2>{{chefs.total_recipes}} Receitas</h2>
+	 <h2>{{chefs.recipeCount}} Receitas</h2>
       </div>
 
       <div class="recipes">
-	 <h1>Receitas</h1>
+	 <h1>Receitas encontradas</h1>
 	 <div class="cards">
 	 {% for recipe in recipesChefs %}
 	    <div class="card">
