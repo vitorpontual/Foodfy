@@ -247,6 +247,27 @@ section.profile form .fields .check input {
 
 }
 
+section.profile .admin{
+   display: flex;
+   justify-content: flex-end;
+}
+
+section.profile .admin .child{
+   display:flex;
+   justify-content: center;
+   align-items: center;
+   background: green;
+   height: 24px;
+   width: 120px;
+   border-radius: 20px;
+}
+
+section.profile .admin h2{
+   color: white;
+   font-size: 14px;
+
+}
+
 
 /* VALIDATE ERROS*/
 section.profile form .fields .error{

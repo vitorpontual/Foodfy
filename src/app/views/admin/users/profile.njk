@@ -4,9 +4,16 @@
    <section class="profile container">
       <form action="/admin/profile?_method=PUT" method='POST'>
 	 <div class="header">
-	    <h4>Bem vindo {{user.firstName}}</h4>
+	    <h4>Bem vindo, {{user.firstName}}!</h4>
 	    <button type='submit' class='button'>Salvar</button>
 	 </div>
+	 {% if session.isAdmin%}
+	    <div class="admin">
+	       <div class="child">
+	       <h2>Administrador</h2>
+	       </div>
+	    </div>
+	 {%endif%}
 
 	 <div class="fields">
 	    {% include './fields-users.njk'%}
