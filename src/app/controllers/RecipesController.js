@@ -21,6 +21,10 @@ module.exports = {
 
       recipes = await Promise.all(recipesPromise)
 
+      if(recipes == 0){
+	 return response.render('admin/recipes/index')
+      }
+
       const paginate = {
 	 total: Math.ceil(recipes[0].total / limit),
 	 page
@@ -90,8 +94,9 @@ module.exports = {
 	    name: file.filename, path: file.path, recipe_id: recipe
 	 }))
 	 const files = await Promise.all(filePromise)
+	 console.log(files)
 
-	 return response.redirect(`/admin/recipes/${recipe}`)
+	 return response.render('admin/animation/sucess')
       }catch(err){
 	 console.error(err)
       }
@@ -131,7 +136,7 @@ module.exports = {
 	    information,
 	 })
 
-	 return response.redirect(`/admin/recipes/${request.body.id}`)
+	 return response.render('admin/animation/update')
 	 
       }catch(err){
 	 console.error(err)
@@ -148,7 +153,7 @@ module.exports = {
 	 await Recipe.delete(request.body.id)
 
 
-	 return response.redirect('/admin/recipes')
+	 return response.render('admin/animation/delete')
       }catch(err){
 	 console.error(err)
       }

@@ -28,29 +28,28 @@ async function show(request, response, next){
    next()
 }
 async function profile(request, response, next){
-   const fillAllFields = checkAllFields(request.body)
-   if(fillAllFields){
-      return response.render('admin/users/profile', fillAllFields)
+   try{
+      const fillAllFields = checkAllFields(request.body)
+      if(fillAllFields){
+	 return response.render('admin/users/profile', fillAllFields)
+      }
+      const { userId: id } = request.session
+
+      const { password, email} = request.body
+
+      const user = await User.findOne({where: {id}})
+      const passed = await compare(password, user.password)
+      if(!passed) return response.render('admin/users/profile', {
+	 user: request.body,
+	 error: "Senha Incorreta!"
+      })
+
+      request.user = user
+
+      next()
+   }catch(err){
+      console.error(err)
    }
-   const { userId: id } = request.session
-
-   const { password} = request.body
-
-   if(!password) return response.render("admin/users/profile", {
-      user: request.body,
-      error: "Please, put your password to update your form"
-   })
-
-   const user = await User.findOne({where: {id}})
-   const passed = await compare(password, user.password)
-   if(!passed) return response.render('admin/users/profile', {
-      user: request.body,
-      error: "Password Incorrect"
-   })
-
-   request.user = user
-
-   next()
 }
 
 async function post(request, response, next){

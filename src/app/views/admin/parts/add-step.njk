@@ -1,5 +1,5 @@
 {% macro addStep(title, values, add, step, recipes, foo)%}
-<div class="item {{values}}">
+<div class="item">
    <div>{{title}}</div>
       {% if recipes %}
 	 <div class="{{values}} new">
@@ -18,8 +18,8 @@
       {% endif %}
    </div>
    <div class='btn-group'>
-      <a class='add-button add-{{add}}' onclick='{{foo}}()'>{{step}}</a>
-      <a class="remove-{{add}}" onclick='remove(".{{values}}.new")'>remover</a>
+      <a class='add-button add-{{add}}' onclick='addRemove.addItem(".{{add}}")'>{{step}}</a>
+      <a class="remove-{{add}}" onclick='addRemove.remove(".{{values}}.new")'>remover</a>
    </div>
 </div>
 {% endmacro %}

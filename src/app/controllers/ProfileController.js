@@ -4,7 +4,6 @@ module.exports = {
    index(request, response){
       const { user } = request
 
-
       user.firstName = user.name.split(' ')[0]
 
       return response.render('admin/users/profile', {user})

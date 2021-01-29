@@ -1,0 +1,30 @@
+.animation-update,
+.animation-delete,
+.animation-sucess{
+   padding: 0;
+   padding-bottom: 72px;
+   text-align: center;
+}
+.animation-update {
+   margin: auto;
+}
+
+.animation-delete,
+.animation-sucess {
+   margin-top: 56px;
+}
+
+.delete-lottie,
+.sucess-lottie {
+   height: 400px;
+}
+
+
+.animation-sucess a,
+.animation-update a {
+   color: var(--primary-color)
+}
+
+.animation-delete a{
+   color: red;
+}

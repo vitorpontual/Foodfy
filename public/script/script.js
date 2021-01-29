@@ -40,43 +40,28 @@ function checkRemove(event){
       event.preventDefault()
    }
 }
+const addRemove = {
+   addItem(event){
+      const element = document.querySelector(`${event}`).parentElement
+      const fieldContainer = document.querySelectorAll(`${event}`)
+      const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
+      if(newField.children[0].value == '') return false
 
-function addIngredient(){
-   const ingredients = document.querySelector(".ingredients.new")
-   const fieldContainer = document.querySelectorAll('.ingredient')
+      newField.children[0].value = ''
+      element.appendChild(newField)
 
-   const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
-   console.log(newField)
-   if(newField.children[0].value == '') return true 
-
-   newField.children[0].value = ''
-   ingredients.appendChild(newField)
+   },
+   remove(event){
+      const list = document.querySelector(`${event}`)
+      let c = document.querySelector(`${event}`).childElementCount
+      if(c >= 2)
+	 list.removeChild(list.lastChild)
+   }
 }
 
-function remove(event){
-   const list = document.querySelector(`${event}`)
-   let c = document.querySelector(`${event}`).childElementCount
-   if(c >= 2)
-      list.removeChild(list.lastChild)
-}
 
-// add prepare
 
-function addPreparation(){
-   const preparations = document.querySelector('.preparations.new')
-   const fieldContainer = document.querySelectorAll('.preparation')
 
-   const newField = fieldContainer[fieldContainer.length - 1].cloneNode(true)
-
-   if (newField.children[0].value == '') return false 
-
-   newField.children[0].value = ''
-   preparations.appendChild(newField)
-}
-
-document
-   .querySelector('.add-preparation')
-   .addEventListener('click', addPreparation)
 /* for (let card of cards) {
     card.addEventListener("click", function(){
        

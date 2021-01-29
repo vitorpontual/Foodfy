@@ -32,7 +32,7 @@ module.exports = {
 	    created_at: date(Date.now()).iso
 	 })
 
-	 return response.redirect(`/admin/chefs/${chefs}`)
+	 return response.render('admin/animation/sucess')
       }catch(err){
 	 console.error(err)
       }
@@ -94,7 +94,7 @@ module.exports = {
 	    await File.delete(file.id)
 	 }
 
-	 return response.redirect(`/admin/chefs/${request.body.id}`)
+	 return response.render('admin/animation/update')
 	 	 
       }catch(err){
 	 console.error(err)
@@ -104,11 +104,11 @@ module.exports = {
       try{
 	 const chef = await Chef.find(request.body.id)
 	 const file = await Chef.file(chef.file_id)
+	 await Chef.delete(request.body.id)
 	 unlinkSync(file[0].path)
 	 await File.delete(file[0].id)
-	 await Chef.delete(request.body.id)
 
-	 return response.redirect('/admin/chefs/')
+	 return response.render('admin/animation/delete')
       }catch(err){
 	 console.error(err)
       }
