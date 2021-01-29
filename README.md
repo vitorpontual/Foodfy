@@ -1,4 +1,5 @@
 <h1 align="center">
+  <img src='https://github.com/luskafaria/foodfy/blob/master/public/assets/logo2.png'>
   <br>
   <br>
   <img src="https://github.com/luskafaria/foodfy/blob/master/public/assets/chef.png" alt="FOODFY LOGO" width="200">
