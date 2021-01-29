@@ -94,7 +94,6 @@ module.exports = {
 	    name: file.filename, path: file.path, recipe_id: recipe
 	 }))
 	 const files = await Promise.all(filePromise)
-	 console.log(files)
 
 	 return response.render('admin/animation/sucess')
       }catch(err){

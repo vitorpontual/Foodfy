@@ -943,6 +943,11 @@ express@^4.17.1:
     utils-merge "1.0.1"
     vary "~1.1.2"
 
+faker@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-5.2.0.tgz#5ee7ca475737eda8cf59c0cbaae5f5068e668dd9"
+  integrity sha512-UlrF1NNRIdzEPtBcy5l8JTlnXQZdz+4pQc3v2TAVocW39nnczCNQ0g0CBKgPGISJPzA2DqJVN1kdr+FCRFdN5g==
+
 fill-range@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/fill-range/-/fill-range-7.0.1.tgz#1919a6a7c75fe38b2c7c77e5198535da9acdda40"
