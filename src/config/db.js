@@ -1,9 +1,10 @@
 const { Pool } = require('pg')
+require('dotenv/config')
 
 module.exports = new Pool({
-   user: 'vpguedes',
-   password: '123qwe123',
+   user: `${process.env.USER}`,
+   password: `${process.env.DATABASE}`,
    local: 'localhost',
    port: '5432',
-   database: 'foodfy 2.0'
+   database: 'foodfy'
 })
