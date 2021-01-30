@@ -6,5 +6,5 @@ module.exports = new Pool({
    password: `${process.env.DATABASE}`,
    local: 'localhost',
    port: '5432',
-   database: 'foodfy'
+   database: 'foodfy 2.0'
 })

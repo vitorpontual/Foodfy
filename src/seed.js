@@ -59,13 +59,24 @@ async function createRecipe(){
    const recipes = []
    const files = []
 
+   function fakerSteps(number){
+      let arr = []
+      for(let i = 0; i < Math.ceil(Math.random() * number); ++i){
+	 let words = faker.lorem.words(Math.ceil(Math.random() * number))
+	 arr.push(words)
+      }
+      return arr
+   }
+   const ingredients = fakerSteps(6)
+   const preparations = fakerSteps(4)
+
    while(recipes.length < totalRecipe){
       recipes.push({
 	 chef_id: chefsIds[Math.floor(Math.random() * totalChef)],
 	 user_id: usersIds[Math.floor(Math.random() * totalUsers)],
 	 title: faker.name.title(),
-	 ingredients: `{${faker.lorem.words(Math.ceil(Math.random() * 4))}}`,
-	 preparations: `{${faker.lorem.words(Math.ceil(Math.random() * 3))}}`,
+	 ingredients: `{${ingredients}}`,
+	 preparations: `{${preparations}}`,
 	 information: faker.lorem.paragraph(Math.ceil(Math.random() * 10)),
       })
    }

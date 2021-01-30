@@ -18,7 +18,6 @@ async function format(recipe){
    recipe.img = files[0].src
    recipe.files = files
    recipe.chef = chef.name
-   console.log(recipe.img)
    return recipe
 }
 
