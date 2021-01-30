@@ -1,4 +1,4 @@
-const Recipe = require('../models/Recipe')
+   const Recipe = require('../models/Recipe')
 const Chef = require('../models/Chef')
 const File = require('../models/File')
 const LoadRecipe = require('../services/LoadRecipeService')
@@ -80,11 +80,14 @@ module.exports = {
       try{
 	 let {chef_id, title, ingredients, preparations, information, user_id} = request.body
 
+	 const i = await LoadRecipe.load("formatComma", ingredients)
+	 const p = await LoadRecipe.load("formatComma", preparations)
+
 	 const recipe = await Recipe.create({
 	    chef_id,
 	    title,
-	    ingredients: `{${ingredients}}`,
-	    preparations: `{${preparations}}`,
+	    ingredients: `{${i}}`,
+	    preparations: `{${p}}`,
 	    information,
 	    user_id: request.session.userId,
 	    created_at: date(Date.now()).iso
@@ -127,11 +130,13 @@ module.exports = {
 
 	 let { chef_id, title, ingredients, preparations, information } = request.body
 
+	 const i = await LoadRecipe.load("formatComma", ingredients)
+	 const p = await LoadRecipe.load("formatComma", preparations)
 	 await Recipe.update(request.body.id, {
 	    chef_id,
 	    title,
-	    ingredients: `{${ingredients}}`,
-	    preparations: `{${preparations}}`,
+	    ingredients: `{${i}}`,
+	    preparations: `{${p}}`,
 	    information,
 	 })
 

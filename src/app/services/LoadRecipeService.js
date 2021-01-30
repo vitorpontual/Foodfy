@@ -11,6 +11,14 @@ async function getImages(recipeId){
 
    return files
 }
+async function formatComma(array){
+   const arrayPromise = array.map(arr => {
+      arr = arr.replace(/,/g, ";")
+      return arr
+   })
+   array = await Promise.all(arrayPromise)
+   return array
+}
 
 async function format(recipe){
    const chef = await Chef.find(recipe.chef_id)
@@ -18,6 +26,18 @@ async function format(recipe){
    recipe.img = files[0].src
    recipe.files = files
    recipe.chef = chef.name
+
+   const ingredientPromise = recipe.ingredients.map(r => {
+      r = r.replace(/;/g, ',')
+      return r
+   })
+   recipe.ingredients = await Promise.all(ingredientPromise)
+
+   const preparationsPromise = recipe.preparations.map(p => {
+      p = p.replace(/;/g, ',')
+      return p
+   })
+   recipe.preparations = await Promise.all(preparationsPromise)
    return recipe
 }
 
@@ -45,6 +65,14 @@ const LoadService = {
       }
    },
    format,
+   async formatComma(){
+      try{
+	 const change = await formatComma(this.filter)
+	 return change
+      }catch(err){
+	 console.error(err)
+      }
+   }
 }
 
 module.exports = LoadService
