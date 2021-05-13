@@ -37,7 +37,7 @@ Launchbase's Final Challenge!
 1. Clone this repository
 
   ```bash
-  git clone https://github.com/mjulialobo/Foodfy
+  git clone https://github.com/vitorpontual/Foodfy
   ```
 
 
